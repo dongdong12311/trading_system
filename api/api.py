@@ -51,7 +51,7 @@ class SimulatedExcutionAPI(ExcutionAPI):
         quantity = orderevent.quantity
         price = orderevent.price
         direction = orderevent.direction
-        ordertime = orderevent.order_time
+        ordertime = 2018
         self.__portfolio.UpdatePosition(symbol,order_type,quantity,price,direction,ordertime)
 
         

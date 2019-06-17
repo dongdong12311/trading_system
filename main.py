@@ -35,6 +35,7 @@ class Engine:
         '''    
     def Run(self,strategy, excutor, dataptr, portfolio = None):  
         events = CreateEventQueue()
+        strategy.ConnectToEventQueue(events)
         while 1:
             res =  engine._Update(events,dataptr,portfolio)
             if not res:
@@ -47,7 +48,7 @@ class Engine:
                     event = events.get(False)
                 # 计算信号    
                 if event.type == 'MARKET':
-                    strategy.calculate_signals(events)
+                    strategy.calculate_signals()
                 # 执行订单
                 elif event.type =='ORDER':   
                     excutor.execute_order(event)

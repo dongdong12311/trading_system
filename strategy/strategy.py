@@ -11,24 +11,38 @@ class Strategy:
     def __init__(self):
         pass
     @abstractmethod
-    def calculate_signals(self,events):
+    def calculate_signals(self):
         raise "no implement error"
+    
+    def ConnectToEventQueue(self,events):
+        self.events = events 
         
+    def GenerateBuyOrder(self,code,size,price):
+        self.events.put(OrderEvent(code,1,size,price,'B'))
+         
+    def GenerateSellOrder(self,code,size,price):
+        self.events.put(OrderEvent(code,1,size,price,'S'))
         
     def RegisterAPI(self,market_data_API,position_info_API,order_info_API):
         self._market_data_API = market_data_API
         self._position_info_API = position_info_API
         self._order_info_API = order_info_API
+        
+
+
+    
 class MyStrategy(Strategy):
     def __init__(self):
-        self.p = 0.0
-    def calculate_signals(self,events):
+        pass
+
+    def calculate_signals(self):
         code = '123'
-        self.p = 1
-        events.put(OrderEvent(code,1,100,self.p,'B',2018))
+        price = 1.0
+        size = 100
+        self.GenerateBuyOrder(code,size,price)
         positions = self._position_info_API.GetPosition(code)
         if positions:
-            events.put(OrderEvent(code,1,100,self.p ,'S',2018))
+            self.GenerateSellOrder(code,size,price)
         
 
 def CreateStragety():
