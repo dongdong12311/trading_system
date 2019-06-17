@@ -24,6 +24,10 @@ class PositionInfoAPI(API):
         super().__init__()
     def RegisterPortfolio(self,portfolio):
         self._portfolio = portfolio
+    def GetPosition(self,code):
+        return self._portfolio.GetPosition(code)
+    def GetAvailableMoney(self):
+        return self._portfolio.AvailableMoney()
 class SimulatedPositionInfoAPI(PositionInfoAPI):
     def __init__(self):
         super().__init__()
@@ -42,7 +46,14 @@ class SimulatedExcutionAPI(ExcutionAPI):
     def RegisterSimulatedPortfolio(self,portfolio):
         self.__portfolio = portfolio
     def execute_order(self,orderevent):
-        print(orderevent)
+        symbol = orderevent.symbol
+        order_type = orderevent.order_type
+        quantity = orderevent.quantity
+        price = orderevent.price
+        direction = orderevent.direction
+        ordertime = orderevent.order_time
+        self.__portfolio.UpdatePosition(symbol,order_type,quantity,price,direction,ordertime)
+
         
     
         

@@ -38,7 +38,7 @@ class SignalEvent(Event):
       
 class OrderEvent(Event):
     'generate order'
-    def __init__(self, symbol, order_type, quantity,price, direction,priority = 3):  
+    def __init__(self, symbol, order_type, quantity,price, direction,order_time,priority = 3):  
         """
         Parameters:
         symbol - The instrument to trade.
@@ -54,9 +54,10 @@ class OrderEvent(Event):
         self.order_type = order_type
         self.quantity = quantity
         self.direction = direction
+        self.order_time = order_time
 
     def __str__(self):
-        return  ("Order: Symbol=%s, Type=%s, Quantity=%s, Price=%.2f ,Direction=%d" % \
+        return  ("Order: Symbol=%s, Type=%s, Quantity=%s, Price=%.2f ,Direction=%s" % \
             (self.symbol, self.order_type, self.quantity, self.price, self.direction))
         
         

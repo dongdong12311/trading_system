@@ -12,38 +12,45 @@ from portfolio.portfolio import CreateSimulatePortfolio
 
 class Engine:
     def __init__(self):
-        self.__events = CreateEventQueue()
-    def init(self,strategy,excutor,dataptr):
-        self._RegisterDataPtr(dataptr)
-        self._RegisterExcutor(excutor)
-        self._RegisterStrategy(strategy)
+        pass
         
-    def _RegisterStrategy(self,strategy):
-        self.__strategy = strategy
-    def _RegisterExcutor(self,excutor):
-        self.__excutor = excutor
-    def _RegisterDataPtr(self,dataptr):
-        self.__dataptr = dataptr
-    def _Update(self,events):
-        return self.__dataptr.Update(events)
-            
-    def Run(self):        
+        
+    def __UpdateSimulatedData(self,events,dataptr,portfolio):
+        portfolio.ShowPosition()
+        if  dataptr.Update(events):
+            portfolio.UpdatePositions(dataptr)
+            return True
+        return False
+        
+    def __UpdateRealData(self,events,dataptr):
+        return  False
+    
+    def _Update(self,events,dataptr, portfolio = None):
+        
+        return self.__UpdateSimulatedData(events,dataptr,portfolio)
+        '''
+        
+        return self.__UpdateRealData(events,dataptr)
+        
+        '''    
+    def Run(self,strategy, excutor, dataptr, portfolio = None):  
+        events = CreateEventQueue()
         while 1:
-            res =  engine._Update(self.__events)
+            res =  engine._Update(events,dataptr,portfolio)
             if not res:
                 break
             while 1:
                 # 获取待处理的事件，如果队列空就结束循环
-                if  self.__events.qsize() == 0:
+                if  events.qsize() == 0:
                     break
                 else:
-                    event = self.__events.get(False)
+                    event = events.get(False)
                 # 计算信号    
                 if event.type == 'MARKET':
-                    self.__strategy.calculate_signals(self.__events)
+                    strategy.calculate_signals(events)
                 # 执行订单
                 elif event.type =='ORDER':   
-                    self.__excutor.execute_order(event)
+                    excutor.execute_order(event)
                 else:
                     raise TypeError    
     
@@ -86,5 +93,4 @@ excutor.RegisterAPI(excution_API)
 
 # ____________engine________________
 engine = Engine()
-engine.init(strategy,excutor,dataptr) 
-engine.Run()
+engine.Run(strategy,excutor,dataptr,portfolio)

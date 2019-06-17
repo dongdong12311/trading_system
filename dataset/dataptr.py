@@ -10,6 +10,11 @@ from event.event import MarketEvent
 class DataPtr:
     def __init__(self):
         self.ind = 0
+    def GetLatestPrice(self,code):
+        return 1
+    def GetSliceData(self,N = 1):
+        return 0.0
+    
     def Update(self,events):
         self.ind += 1
         if self.ind < 10:
