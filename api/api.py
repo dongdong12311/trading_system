@@ -14,6 +14,8 @@ class MarketDataAPI(API):
         pass
     def RegisterDataPtr(self,dataptr):
         self._dataptr = dataptr
+    def GetSliceData(self,N):
+        return self._dataptr.GetSliceData(N)
     
 class SimulatedMarketDataAPI(MarketDataAPI):
     def __init__(self):

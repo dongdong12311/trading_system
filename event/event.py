@@ -24,16 +24,6 @@ class MarketEvent(Event):
         self.type = 'MARKET'
       
         
-class SignalEvent(Event):
-    'generate signal '
-    def __init__(self, symbol, quantity,price,direction,priority = 4):
-        super().__init__(priority)
-        self.type = 'SIGNAL'
-        self.symbol = symbol    
-        self.quantity = quantity
-        self.price = price
-        self.direction = direction
-       
     
       
 class OrderEvent(Event):
@@ -59,19 +49,7 @@ class OrderEvent(Event):
         return  ("Order: Symbol=%s, Type=%s, Quantity=%s, Price=%.2f ,Direction=%s" % \
             (self.symbol, self.order_type, self.quantity, self.price, self.direction))
         
-        
-class TradeResultEvent(Event):
-    "市场返回成交的结果"
-    def __init__(self, timeindex, symbol, order_type, quantity,price, direction,errorcode,priority = 1):         
-        super().__init__(priority)
-        self.type = 'TradeResult'
-        self.timeindex = timeindex
-        self.symbol = symbol
-        self.order_type = order_type
-        self.quantity = quantity
-        self.price = price
-        self.direction = direction
-        self.errorcode = errorcode
+
     
         
         

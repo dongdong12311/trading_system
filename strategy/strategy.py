@@ -39,6 +39,8 @@ class MyStrategy(Strategy):
         code = '123'
         price = 1.0
         size = 100
+        data = self._market_data_API.GetSliceData(3)
+        print(data)
         self.GenerateBuyOrder(code,size,price)
         positions = self._position_info_API.GetPosition(code)
         if positions:

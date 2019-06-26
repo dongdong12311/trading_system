@@ -5,6 +5,7 @@ from event.event import CreateEventQueue
 from strategy.strategy import CreateStragety
 from excutor.excutor import CreateExcutor
 from dataset.dataptr import CreateDataPtr
+from dataset.dataset import CreateHistoryDataSet
 from portfolio.portfolio import CreateSimulatePortfolio
 
 
@@ -54,9 +55,13 @@ class Engine:
                     excutor.execute_order(event)
                 else:
                     raise TypeError    
+                    
+                    
+dataset = CreateHistoryDataSet()
+
     
 # _______________dataset_______________   
-dataptr = CreateDataPtr()
+dataptr = CreateDataPtr(dataset)
 
 
 
