@@ -56,10 +56,12 @@ class Engine:
                 else:
                     raise TypeError    
                     
-                    
+start = '20180101'
+end = '20180131'               
+print('init data')     
 dataset = CreateHistoryDataSet()
-
-    
+dataset.init(start,end)
+print('done')
 # _______________dataset_______________   
 dataptr = CreateDataPtr(dataset)
 

@@ -9,17 +9,19 @@ Created on Mon Jun 17 13:41:39 2019
 from event.event import MarketEvent
 class DataPtr:
     def __init__(self,dataset):
-        self.ind = 0
+        self.__ind = 0
         self.dataset = dataset
     def GetLatestPrice(self,code):
         return self.dataset.GetLatestPrice(code)
     def GetSliceData(self,N = 1):
-        return self.dataset.GetSliceData(N)
+        return self.dataset.GetSliceData(self.__ind,N)
     
     def Update(self,events):
-        if self.dataset.ComeToEnd(self.ind):
+
+        if self.dataset.ComeToEnd(self.__ind):
             return False
-        self.ind =  self.dataset.Update(self.ind)
+        self.__ind =  self.dataset.Update(self.__ind)
+        
         events.put(MarketEvent())
         return True
 

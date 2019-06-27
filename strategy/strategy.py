@@ -36,7 +36,7 @@ class MyStrategy(Strategy):
         pass
 
     def calculate_signals(self):
-        code = '123'
+        code = '600232.SH'
         price = 1.0
         size = 100
         data = self._market_data_API.GetSliceData(3)

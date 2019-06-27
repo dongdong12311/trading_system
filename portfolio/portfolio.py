@@ -129,8 +129,6 @@ class SimulatedPortfolio(Portfolio):
         else:
             raise "Unknown order"                
     def ShowPosition(self):
-        print('_______________')        
-        print(self.__positions)
-        print(self.__basic)
+        pass
 def CreateSimulatePortfolio():
     return SimulatedPortfolio()
