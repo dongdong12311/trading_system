@@ -24,7 +24,7 @@ class MarketEvent(Event):
         self.type = 'MARKET'
       
         
-    
+  
       
 class OrderEvent(Event):
     'generate order'
@@ -51,6 +51,15 @@ class OrderEvent(Event):
         
 
     
+        
+        
+        
+class ChangeWeightEvent(Event):
+    def __init__(self,symbol,weight):
+        self.type = 'CHANGE_WEIGHT'
+        self.symbol = symbol
+        self.weight = weight
+        
         
         
         
