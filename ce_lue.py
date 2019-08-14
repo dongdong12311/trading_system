@@ -47,13 +47,13 @@ def init(context):
 def handle_bar(context, api):
 
     date = api.now()
-    print(date)
+
     #if date in context.balance_dates:
     history_prices = {}
     for stock in context.stocks:
         history_price = api.history_bars(stock, context.expected_return_days, '1d','close')
-        print(history_price)
         history_prices.update({stock:history_price})
+    
     history_prices = pd.DataFrame(history_prices)
     mu = expected_returns.mean_historical_return(history_prices)
     if context.cov_method == 'sample':
@@ -76,8 +76,10 @@ def handle_bar(context, api):
     
     if context.cleaned_weights is True:
         weights = ef.clean_weights()
-    
+    prices = []
+    weight = []
     for stock in context.stocks:
-        weight = weights[stock]
-        api.order_target_percent(stock, weight)   
+        weight.append(weights[stock])
+        prices.append(api.latest_price(stock,"1d"))
+    api.order_target_percent(stocks,weight,prices)   
     

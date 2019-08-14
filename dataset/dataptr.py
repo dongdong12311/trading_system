@@ -5,43 +5,39 @@ Created on Mon Jun 17 13:41:39 2019
 
 @author: dongdong
 """
+
 import numpy as np
 from event.event import MarketEvent
 class DataPtr:
-    def __init__(self,dataset,stock_list,start):
-        self.__ind = 0
-        self._dataset = dataset
-        self._stock_list = stock_list
-        self._init(start)
-    def _init(self,start):
-        self._line_map = {}
-        for code in self._stock_list:
-            
-            self._line_map.update({code : line})
-            
-    def GetLatestPrice(self,code):
-        return self._dataset.GetLatestPrice(code)
-    def history_bars(self,stock, expected_return_days, period,field):
-        line_map = self._GetLine_map(stock)
-        if line_map is not None:
-            data =  self._dataset.data[line_map-expected_return_days+1:line_map+1][field]
-            data.astype(np.float16)
-            data = data/10000
+    def __init__(self,base_data_source,ptrl_list):
+        self._ind = 0
+        self._base_data_source = base_data_source
+        self._ptrl_list = ptrl_list
+        self._end = len(ptrl_list)
+    
+    def latest_price(self,code,frequency):
+        price_slice =  self._base_data_source.get_bar(code,self.now(),frequency)
+        if price_slice is not None:
+            return price_slice[4]
+    def history_bars(self,code, expected_return_days, frequency,fields):
+        return self._base_data_source.history_bars(code, expected_return_days,
+                                                   frequency, fields, 
+                                                   self.now(),
+                     skip_suspended=False, include_now=False,
+                     adjust_type='none', adjust_orig=None)
         
-    def _GetLine_map(self,stock):
-        return self._line_map[stock]
         
         
     def Update(self,events):
 
-        if self._dataset.ComeToEnd(self.__ind):
+        if self._ind >= self._end - 1:
             return False
-        self.__ind =  self._dataset.Update(self.__ind)
+        self._ind =  self._ind + 1
         
         events.put(MarketEvent())
         return True
 
     def now(self):
-        return self._dataset.now(self.__ind)
-def CreateDataPtr(dataset):
-    return DataPtr(dataset)
+        return self._ptrl_list[self._ind]
+def CreateDataPtr(dataset,ptrl_list):
+    return DataPtr(dataset,ptrl_list)

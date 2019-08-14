@@ -6,7 +6,8 @@ Created on Mon Jun 17 13:30:08 2019
 @author: dongdong
 """
 from abc import abstractmethod
-from event.event import ChangeWeightEvent
+from event.event import OrderTargetPercentEvent
+    
 class API:
     def __init__(self):
         pass
@@ -15,9 +16,8 @@ class MarketDataAPI(API):
         pass
     def RegisterDataPtr(self,dataptr):
         self._dataptr = dataptr
-    def GetSliceData(self,N):
-        return self._dataptr.GetSliceData(N)
-    
+    def latest_price(self,code,frequency):
+        return self._dataptr.latest_price(code,frequency)
     def now(self):
         return self._dataptr.now()
     def history_bars(self,stock, expected_return_days, period,field):
@@ -60,11 +60,10 @@ class SimulatedExcutionAPI(ExcutionAPI):
         direction = orderevent.direction
         ordertime = 2018
         self.__portfolio.UpdatePosition(symbol,order_type,quantity,price,direction,ordertime)
+    def order_target_percent(self,stock,weight,price,ordertime):
+        #print(price)
+        self.__portfolio.UpdatePortfolio(stock,weight,price,ordertime)
     
-    def change_weight(self,event):
-        symbol = event.symbol
-        weight = event.weight
-        self.__portfolio.UpdatePosition(symbol,weight)
     
         
 def CreateMarketDataAPI():
@@ -87,8 +86,9 @@ class User_API:
         self._events = events
     def history_bars(self,stock, expected_return_days, period,field):
         return self._market_data_api.history_bars(stock, expected_return_days, period,field)
-    def order_target_percent(self,stock, weight):
-        self._events.put()
+    def order_target_percent(self,stocks,weights,prices): 
+        self._events.put(OrderTargetPercentEvent(stocks,weights,prices,self._market_data_api.now()))
+        
     def GetPositionWeight(self,code):
         pass
     
@@ -98,8 +98,8 @@ class User_API:
     def Sell(self,code,price,size):
         pass
     
-    def LatestPrice(self,stock):
-        pass
+    def latest_price(self,code,frequency):
+        return self._market_data_api.latest_price(code,frequency)
     
     def PositionValue(self):
         pass

@@ -54,11 +54,13 @@ class OrderEvent(Event):
         
         
         
-class ChangeWeightEvent(Event):
-    def __init__(self,symbol,weight):
+class OrderTargetPercentEvent(Event):
+    def __init__(self,symbols,weights,prices,ordertime):
         self.type = 'CHANGE_WEIGHT'
-        self.symbol = symbol
-        self.weight = weight
+        self.symbols = symbols
+        self.prices = prices
+        self.weights = weights
+        self.ordertime = ordertime
         
         
         

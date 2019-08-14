@@ -7,7 +7,7 @@ Created on Wed Jun 26 10:58:38 2019
 """
 
 import bcolz
-from .tushare_market_data import LoadTradeCalendar,LoadHistoryData
+#from .tushare_market_data import LoadTradeCalendar,LoadHistoryData
 from abc import ABCMeta, abstractmethod, abstractproperty
 class DataSet(metaclass=ABCMeta):
     def __init__(self):
@@ -23,9 +23,7 @@ class DataSet(metaclass=ABCMeta):
     @abstractmethod
     def ComeToEnd(self,ind):
         pass   
-    @abstractmethod
-    def GetLatestPrice(self,code):
-        pass  
+
     
 class HistToryDataSet(DataSet):
     def __init__(self):
@@ -35,6 +33,7 @@ class HistToryDataSet(DataSet):
         self.data = bcolz.open(data_path)
         self.datasize = len(self.ind_list)
 
+        
     def Update(self,ind):
         return ind + 1
     def ComeToEnd(self,ind):
