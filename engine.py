@@ -5,13 +5,13 @@ Created on Sun Aug 11 21:47:27 2019
 @author: Administrator
 """
 
-from api.api import CreateExcutionAPI,CreateMarketDataAPI,CreateOrderInfoAPI,CreatePositionInfoAPI,User_API
-from event.event import CreateEventQueue
-from strategy.strategy import CreateStragety
-from excutor.excutor import CreateExcutor
-from dataset.dataptr import CreateDataPtr
-from dataset.dataset import CreateHistoryDataSet
-from portfolio.portfolio import CreateSimulatePortfolio
+from .api.api import CreateExcutionAPI,CreateMarketDataAPI,CreateOrderInfoAPI,CreatePositionInfoAPI,User_API
+from .event.event import CreateEventQueue
+from .strategy.strategy import CreateStragety
+from .excutor.excutor import CreateExcutor
+from .dataset.dataptr import CreateDataPtr
+from .dataset.dataset import CreateHistoryDataSet
+from .portfolio.portfolio import CreateSimulatePortfolio
 class Context:
     def __init__(self):
         pass
@@ -85,8 +85,8 @@ class Engine:
                     excutor.order_target_percent(event)
                 else:
                     raise TypeError    
-from dataset.base_data_source import BaseDataSource
-from analyser.analyser import Analyser
+from trading_system.dataset.base_data_source import BaseDataSource
+from trading_system.analyser.analyser import Analyser
 def Run_func(init,handle_bar,config):                    
     start = config['start']
     end = config['end']            
@@ -125,6 +125,6 @@ def Run_func(init,handle_bar,config):
     # ____________engine________________
     engine = Engine(analyser,config)
     engine.init(dataptr)
-    from portfolio.summarise import summarise
+    from trading_system.portfolio.summarise import summarise
     return summarise(engine.Run(init,handle_bar,api,excutor,dataptr,portfolio),config)
     

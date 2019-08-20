@@ -6,7 +6,7 @@ Created on Mon Jun 17 13:31:56 2019
 @author: dongdong
 """
 from abc import abstractmethod
-from event.event import OrderEvent
+from trading_system.event.event import OrderEvent
 class Strategy:
     def __init__(self):
         pass

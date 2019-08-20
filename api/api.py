@@ -6,7 +6,7 @@ Created on Mon Jun 17 13:30:08 2019
 @author: dongdong
 """
 from abc import abstractmethod
-from event.event import OrderTargetPercentEvent
+from trading_system.event.event import OrderTargetPercentEvent
 
    
 class API:

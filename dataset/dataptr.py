@@ -7,7 +7,7 @@ Created on Mon Jun 17 13:41:39 2019
 """
 
 import numpy as np
-from event.event import MarketEvent
+from trading_system.event.event import MarketEvent
 class DataPtr:
     def __init__(self,base_data_source,ptrl_list):
         self._ind = 0
