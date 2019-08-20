@@ -74,7 +74,7 @@ def update_stock_index(file_path):
             df = pro.index_basic(market= key )
             for code in df['ts_code']:
                 "this should be removed "
-                if code == '000001.SH':
+                if code == '000001.SH' or code == '000300.SH':
                     data = pro.index_daily(ts_code=code)
                     data = data.sort_values(by = 'trade_date')
                     data = data.drop(['ts_code'],axis=1)

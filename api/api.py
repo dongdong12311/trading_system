@@ -7,7 +7,8 @@ Created on Mon Jun 17 13:30:08 2019
 """
 from abc import abstractmethod
 from event.event import OrderTargetPercentEvent
-    
+
+   
 class API:
     def __init__(self):
         pass
@@ -22,6 +23,7 @@ class MarketDataAPI(API):
         return self._dataptr.now()
     def history_bars(self,stock, expected_return_days, period,field):
         return self._dataptr.history_bars(stock, expected_return_days, period,field)
+
 class SimulatedMarketDataAPI(MarketDataAPI):
     def __init__(self):
         super().__init__()
@@ -97,6 +99,8 @@ class User_API:
     
     def Sell(self,code,price,size):
         pass
+    def get_trading_calendar(self,start,end):
+        return self._market_data_api.get_trading_calendar()
     
     def latest_price(self,code,frequency):
         return self._market_data_api.latest_price(code,frequency)

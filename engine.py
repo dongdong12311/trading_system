@@ -23,12 +23,14 @@ class Handler():
         
     
 class Engine:
-    def __init__(self):
-        pass
-        
+    def __init__(self,analyser,config):
+        self._analyser = analyser
+        self.config = config
+    def init(self,dataptr):
+        trade_date = dataptr.now()
+        self.initial_benchmark = dataptr.stock_index_bars(self.config['benchmark'],1,'1d','close',trade_date)[0]
         
     def __UpdateSimulatedData(self,events,dataptr,portfolio):
-        portfolio.ShowPosition()
         if  dataptr.Update(events):
             portfolio.UpdatePositions(dataptr)
             return True
@@ -38,13 +40,24 @@ class Engine:
         return  False
     
     def _Update(self,events,dataptr, portfolio = None):
-        
-        return self.__UpdateSimulatedData(events,dataptr,portfolio)
-        '''
-        
-        return self.__UpdateRealData(events,dataptr)
-        
-        '''    
+        if self.__UpdateSimulatedData(events,dataptr,portfolio):
+            self._Append_benchmark(dataptr)
+            return True
+        return False
+    def _Append_benchmark(self,dataptr):
+        trade_date = dataptr.now()
+        cash = 0 
+        market_value = dataptr.stock_index_bars(self.config['benchmark'],1,'1d','close',trade_date)[0]
+        static_unit_net_value = market_value/self.initial_benchmark
+        market_value = self.config['initial_capital'] * static_unit_net_value
+        self._analyser.append_benchmark_portfolio(trade_date,
+                                   cash,
+                                   market_value,
+                                   static_unit_net_value,
+                                   market_value,
+                                   static_unit_net_value,
+                                   self.config['initial_capital'])          
+            
     def Run(self,init,handle_bar,api,excutor,dataptr,portfolio = None):  
         context = Context()
         init(context)
@@ -73,6 +86,7 @@ class Engine:
                 else:
                     raise TypeError    
 from dataset.base_data_source import BaseDataSource
+from analyser.analyser import Analyser
 def Run_func(init,handle_bar,config):                    
     start = config['start']
     end = config['end']            
@@ -80,10 +94,11 @@ def Run_func(init,handle_bar,config):
     dataset = BaseDataSource(config['data_path'])
     ptrl_list = dataset.get_trading_calendar(start,end)
     print("done")
+    analyser = Analyser()
     # _______________dataset_______________   
     dataptr = CreateDataPtr(dataset,ptrl_list)
     # ____________portfolio________________
-    portfolio = CreateSimulatePortfolio(
+    portfolio = CreateSimulatePortfolio(analyser,
             config['initial_capital']) 
     #_____________apply api________________
           
@@ -108,7 +123,8 @@ def Run_func(init,handle_bar,config):
     excutor.RegisterAPI(excution_API)
             
     # ____________engine________________
-    engine = Engine()
+    engine = Engine(analyser,config)
+    engine.init(dataptr)
     from portfolio.summarise import summarise
     return summarise(engine.Run(init,handle_bar,api,excutor,dataptr,portfolio),config)
     

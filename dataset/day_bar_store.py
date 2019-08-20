@@ -42,7 +42,7 @@ class DayBarStore(object):
         except ValueError:
             pass
 
-    def get_bars(self, order_book_id, fields=None):
+    def get_bars(self, order_book_id, fields=None,trade_date = 'date'):
         try:
             s, e = self._index[order_book_id]
         except KeyError:
@@ -65,7 +65,8 @@ class DayBarStore(object):
         result = np.empty(shape=(e - s, ), dtype=dtype)
         for f in fields:
             result[f] = self._converter.convert(f, self._table.cols[f][s:e])
-        result['datetime'] = self._table.cols['date'][s:e]
+
+        result['datetime'] = self._table.cols[trade_date][s:e]
         result['datetime'] *= 1000000
 
         return result

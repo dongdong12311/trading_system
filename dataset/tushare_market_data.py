@@ -19,3 +19,8 @@ def LoadTsTradeCalendar(start,end):
             trade_days.append(parse(dates.iloc[date].cal_date))
     return trade_days
     
+
+if __name__ == '__main__':
+    key  = "SSE"
+    df = pro.index_basic(market= key)
+    #t = pro.index_daily(ts_code="")

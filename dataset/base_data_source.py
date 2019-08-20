@@ -12,8 +12,8 @@ import numpy as np
 from .datetime_func import convert_date_to_int, convert_int_to_date
 from .py2 import lru_cache
 
-from .converter import StockBarConverter
-from .const import trading_calendar_path,daily_data_path
+from .converter import StockBarConverter,IndexBarConverter
+from .const import trading_calendar_path,daily_data_path,stock_index_path
 from .day_bar_store import DayBarStore
 from .trading_dates_store import TradingDatesStore
 
@@ -26,10 +26,11 @@ class BaseDataSource():
             return os.path.join(path, name)
 
         self._day_bars = [
-            DayBarStore(_p(daily_data_path), StockBarConverter)
+            DayBarStore(_p(daily_data_path), StockBarConverter),
+            DayBarStore(_p(stock_index_path),IndexBarConverter)
         ]
         self._trading_dates = TradingDatesStore(_p(trading_calendar_path))
-
+        
     def get_trading_calendar(self,start,end):
         return self._trading_dates.get_trading_calendar(start,end)
 
@@ -47,22 +48,22 @@ class BaseDataSource():
 
         
     @lru_cache(None)
-    def _all_day_bars_of(self,code):
+    def _all_day_bars_of(self,code,i,trade_date = 'date'):
         #i = self._index_of(instrument)
-        return self._day_bars[0].get_bars(code, fields=None)
+        return self._day_bars[i].get_bars(code, None,trade_date)
 
     @lru_cache(None)
-    def _filtered_day_bars(self, code):
-        bars = self._all_day_bars_of(code)
+    def _filtered_day_bars(self, code,i,trade_date = 'date',volume = 'volume'):
+        bars = self._all_day_bars_of(code,i,trade_date)
         if bars is None:
             return None
-        return bars[bars['volume'] > 0]
+        return bars[bars[volume] > 0]
 
     def get_bar(self, code, dt, frequency):
         if frequency != '1d':
             raise NotImplementedError
 
-        bars = self._all_day_bars_of(code)
+        bars = self._all_day_bars_of(code,0)
         if bars is None:
             return
         dt = np.uint64(convert_date_to_int(dt))
@@ -72,8 +73,17 @@ class BaseDataSource():
 
         return bars[pos]
 
-
-
+    def stock_index_bars(self,code,bar_count,frequency,fields,dt):
+        if frequency != '1d':
+            raise NotImplementedError        
+        bars = self._filtered_day_bars(code,1,'trade_date','vol')
+        if bars is None:
+            return None
+        dt = np.uint64(convert_date_to_int(dt))
+        i = bars['datetime'].searchsorted(dt, side='right')
+        left = i - bar_count if i >= bar_count else 0
+        bars = bars[left:i]
+        return bars if fields is None else bars[fields]
     def history_bars(self, code, bar_count, frequency, fields, dt,
                      skip_suspended=False, include_now=False,
                      adjust_type='none', adjust_orig=None):
@@ -81,9 +91,9 @@ class BaseDataSource():
             raise NotImplementedError
 
         if skip_suspended :
-            bars = self._filtered_day_bars(code)
+            bars = self._filtered_day_bars(code,0)
         else:
-            bars = self._all_day_bars_of(code)
+            bars = self._all_day_bars_of(code,0)
 
         if bars is None:
             return None

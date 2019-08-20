@@ -10,7 +10,7 @@ def summarise(res,config):
     
     summary = {
                'STOCK':config['initial_capital'],
-               'alpha':alpha,
+               'alpha':1.0,
                'annualized_returns':1,
                'benchmark_annualized_returns':1,
                'benchmark_total_returns':1,

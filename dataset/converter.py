@@ -105,7 +105,11 @@ IndexBarConverter = Converter(
         "close": Rule(float64, 1 / 10000.0, 2),
         "high": Rule(float64, 1 / 10000.0, 2),
         "low": Rule(float64, 1 / 10000.0, 2),
-        "volume": Rule(float64, 1, 0),
+        "vol": Rule(float64, 1, 0),
+        "pre_close":Rule(float64, 1 / 10000.0, 2),
+        "change":Rule(float64, 1 / 10000.0, 2),
+        "pct_chg":Rule(float64, 1 / 10000.0, 2),
+        "amount":Rule(float64, 1 / 10000.0, 2),
     }
 )
 

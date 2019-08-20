@@ -14,6 +14,8 @@ class DataPtr:
         self._base_data_source = base_data_source
         self._ptrl_list = ptrl_list
         self._end = len(ptrl_list)
+    def get_trading_calendar(self,start,end):
+        return self._base_data_source.get_trading_calendar(start,end)
     
     def latest_price(self,code,frequency):
         price_slice =  self._base_data_source.get_bar(code,self.now(),frequency)
@@ -25,7 +27,8 @@ class DataPtr:
                                                    self.now(),
                      skip_suspended=False, include_now=False,
                      adjust_type='none', adjust_orig=None)
-        
+    def stock_index_bars(self,code,bar_count,frequency,fields,dt):
+        return self._base_data_source.stock_index_bars(code,bar_count,frequency,fields,dt)
         
         
     def Update(self,events):

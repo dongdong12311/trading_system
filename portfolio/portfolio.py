@@ -6,12 +6,12 @@ Created on Mon Jun 17 13:46:45 2019
 @author: dongdong
 """
 from abc import ABCMeta, abstractmethod, abstractproperty
-from .analyser import Analyser,TradeStatic
 class Portfolio(metaclass=ABCMeta):
     def __init__(self):
         pass
 class SimulatedPortfolio(Portfolio):
-    def __init__(self,initial_capital = 1000000.0):
+    def __init__(self,_analyser,initial_capital):
+        
         self._log = []
         self.initial_capital = initial_capital
         self.__money = initial_capital
@@ -29,15 +29,15 @@ class SimulatedPortfolio(Portfolio):
         '''
         
         "分析器"
-        self._analyser = Analyser()
+        self._analyser = _analyser
     def GetPosition(self,code):
         if code not in self.__positions.keys():
             return None
         return self.__positions[code]
     def GetPositions(self):
-        res = []
+        res = {}
         for i in self.__positions.keys():
-            res.append({i:self.__positions[i]})
+            res.update({i:self.__positions[i]})
         return res
     def AvailableMoney(self):
         return self.__basic['available']
@@ -62,15 +62,69 @@ class SimulatedPortfolio(Portfolio):
                     self.__positions[code][5] = ( buyprice - price )/buyprice*100
                 
                 self.__positions[code][6] = price
-        _date = dataptr.now()
+        
+        
+        self._Append_account(dataptr)
+        self._Append_position(dataptr)
+        self._Append_portfolio(dataptr)
+        #self._Append_benchmark(dataptr)
+    
+        
+    def _Append_trade(self,symbol,quantity,price,
+                      trade_date,trade_side,transaction_cost):
+        commission = 0
+        exec_id = ""
+        last_price = price
+        last_quantity = quantity
+        order_book_id = symbol
+        order_id = ""
+        position_effect = "OPEN"
+        side = trade_side
+        tax = 0
+        trading_datetime = trade_date
+
+        self._analyser.append_trades(trade_date,commission,
+                 exec_id,last_price,
+                 last_quantity,
+                 order_book_id,
+                 order_id,
+                 position_effect,
+                 side,symbol,tax,
+                 trading_datetime,
+                 transaction_cost)
+    def _Append_account(self,dataptr):
+        trade_date = dataptr.now()
+        cash = self.AvailableMoney()
+        dividend_receivable = 0
+        market_value = self.MarketValue()
+        total_value = market_value + cash
+        transaction_cost = 0
+        #a = _Account(trade_date,cash,dividend_receivable,market_value,total_value,transaction_cost)
+        self._analyser.append_stock_account(trade_date,cash,
+                                            dividend_receivable,
+                                            market_value,
+                                            total_value,
+                                            transaction_cost)
+    def _Append_position(self,dataptr):
         _position = self.GetPositions()
-        self._analyser.append_position(_date,_position)
+        _date = dataptr.now()
+        for key in _position.keys():
+            avg_price = _position[key][1]
+            last_price = _position[key][6]
+            market_value = _position[key][7]
+            order_book_id = ""
+            quant = _position[key][2]
+            symbol = key
+            self._analyser.append_position(_date,avg_price,last_price,
+                          market_value,order_book_id,quant,symbol)        
+    def _Append_portfolio(self,dataptr):
+        _date = dataptr.now()
         money = self.AvailableMoney()
         market_value = self.MarketValue()
         total_value = market_value + money
         static_unit_net_value = total_value/self.initial_capital
-        trade_static = TradeStatic(_date,money,market_value,static_unit_net_value,total_value,static_unit_net_value,static_unit_net_value)
-        self._analyser.append_static(trade_static)
+        self._analyser.append_portfolio(_date,money,market_value,static_unit_net_value,total_value,
+                          static_unit_net_value,static_unit_net_value)        
     def MarketValue(self):
         res = 0
         for i in self.__positions.keys():
@@ -117,16 +171,18 @@ class SimulatedPortfolio(Portfolio):
         else:
           self.__positions[symbol][7]  = self.__positions[symbol][2] *self.__positions[symbol][6]
     def __SellStock(self,symbol,quantity,price,ordertime):
-        self._log.append(self.AvailableMoney())
+        #self._log.append(self.AvailableMoney())
         self.__MinuesStock(symbol,quantity)
-        self.__AddMoney(quantity * price)    
-        self._log.append("sell" + symbol + " "+ str(quantity) + " " +str(price))
-        self._log.append(self.AvailableMoney())
+        self.__AddMoney(quantity * price)
+        self._Append_trade(symbol,quantity,price,ordertime,'S',0)
+        #self._log.append("sell" + symbol + " "+ str(quantity) + " " +str(price))
+        #self._log.append(self.AvailableMoney())
     def __BuyStock(self,symbol,quantity,price,ordertime):
-        self._log.append(self.AvailableMoney())
+        #self._log.append(self.AvailableMoney())
         self.__GetStock(symbol,quantity,price,'B',ordertime)
         self.__MinuesMoney(price * quantity)
-        self._log.append("buy" + symbol + " "+ str(quantity) + " " +str(price))
+        self._Append_trade(symbol,quantity,price,ordertime,'B',0)
+        #self._log.append("buy" + symbol + " "+ str(quantity) + " " +str(price))
     def UpdatePosition(self,symbol,order_type,quantity,price,direction,ordertime):
         if direction == 'S':
             if self.__CheckStock(symbol,quantity):
@@ -167,5 +223,5 @@ class SimulatedPortfolio(Portfolio):
                     self.__BuyStock(stocks[i],size,prices[i],ordertime)
     def get_log(self):
         return self._analyser.get_result()
-def CreateSimulatePortfolio(initial_capital):
-    return SimulatedPortfolio(initial_capital)
+def CreateSimulatePortfolio(analyser,initial_capital):
+    return SimulatedPortfolio(analyser,initial_capital)
