@@ -16,7 +16,7 @@
 
 import six
 
-from rqalpha import const
+from trading_system import const
 
 
 class CustomError(object):

@@ -16,7 +16,7 @@
 
 from datetime import time
 
-from rqalpha.utils.datetime_func import TimeRange
+from trading_system.utils.datetime_func import TimeRange
 
 TRADING_PERIOD_DICT = dict()
 

@@ -18,7 +18,7 @@ from datetime import datetime
 import logbook
 from logbook import Logger, StderrHandler
 
-from rqalpha.utils.py2 import to_utf8
+from trading_system.utils.py2 import to_utf8
 
 logbook.set_datetime_format("local")
 
