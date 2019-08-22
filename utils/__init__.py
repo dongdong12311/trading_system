@@ -24,12 +24,12 @@ from decimal import getcontext, ROUND_FLOOR
 from contextlib import contextmanager
 import numpy as np
 
-from rqalpha.utils.exception import CustomError, CustomException
-from rqalpha.const import EXC_TYPE, INSTRUMENT_TYPE, DEFAULT_ACCOUNT_TYPE, UNDERLYING_SYMBOL_PATTERN, NIGHT_TRADING_NS
-from rqalpha.utils.datetime_func import TimeRange
-from rqalpha.utils.default_future_info import STOCK_TRADING_PERIOD, TRADING_PERIOD_DICT
-from rqalpha.utils.i18n import gettext as _
-from rqalpha.utils.py2 import lru_cache
+from trading_system.utils.exception import CustomError, CustomException
+from trading_system.const import EXC_TYPE, INSTRUMENT_TYPE, DEFAULT_ACCOUNT_TYPE, UNDERLYING_SYMBOL_PATTERN, NIGHT_TRADING_NS
+from trading_system.utils.datetime_func import TimeRange
+from trading_system.utils.default_future_info import STOCK_TRADING_PERIOD, TRADING_PERIOD_DICT
+from trading_system.utils.i18n import gettext as _
+from trading_system.utils.py2 import lru_cache
 
 
 def safe_round(value, ndigits=3):
