@@ -7,7 +7,7 @@ Created on Mon Jun 17 13:30:08 2019
 """
 from abc import abstractmethod
 from trading_system.event.event import OrderTargetPercentEvent
-
+import datetime
    
 class API:
     def __init__(self):
@@ -79,6 +79,15 @@ def CreateOrderInfoAPI():
 def CreateExcutionAPI():
     return SimulatedExcutionAPI()
 
+class get_calendar:
+    def __init__(self):
+        from trading_system.dataset.const  import base_path,bcolz_data_path,trading_calendar_path
+        import os
+        from trading_system.dataset.trading_dates_store import TradingDatesStore
+        self._cal = TradingDatesStore(os.path.join(
+                os.path.join(base_path,bcolz_data_path),trading_calendar_path))
+    def sessions_in_range(self,start,end):
+        return self._cal.get_trading_calendar(start,end)
 
 class User_API:
     def __init__(self,market_data_api,position_info_api):
@@ -110,3 +119,7 @@ class User_API:
     
     def now(self):
         return self._market_data_api.now()
+    
+    def today(self):
+        d = self.now()
+        return datetime.date(d.year,d.month,d.day)

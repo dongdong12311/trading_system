@@ -18,3 +18,9 @@ import datetime
 a = BaseDataSource(os.path.join(base_path,bcolz_data_path))
 #s = a.history_bars("000001.SZ",10,'1d','close',datetime.datetime(2019,6,1))
 s = a.stock_index_bars("000001.SH",10,'1d','close',datetime.datetime(2019,6,1))
+
+from api.api import get_calendar
+
+
+t = get_calendar()
+t.sessions_in_range(20160101,20160112)
