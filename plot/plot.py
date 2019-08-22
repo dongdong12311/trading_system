@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import rqalpha
-from rqalpha.utils.logger import system_log
-from rqalpha.utils.i18n import gettext
+#import rqalpha
+#from rqalpha.utils.logger import system_log
+from trading_system.utils.i18n import gettext
 
 
 def max_ddd(arr):
@@ -70,7 +70,7 @@ def plot_result(result_dict, show_windows=True, savefile=None):
     font = findfont(FontProperties(family=['sans-serif']))
     if "/matplotlib/" in font:
         use_chinese_fonts = False
-        system_log.warn("Missing Chinese fonts. Fallback to English.")
+        #system_log.warn("Missing Chinese fonts. Fallback to English.")
 
     summary = result_dict["summary"]
 
@@ -114,11 +114,11 @@ def plot_result(result_dict, show_windows=True, savefile=None):
     # draw logo
     ax = plt.subplot(gs[:3, -1:])
     ax.axis("off")
-    filename = os.path.join(
-        os.path.dirname(os.path.realpath(rqalpha.__file__)),
-        "resource", 'ricequant-logo.png')
-    img = mpimg.imread(filename)
-    ax.imshow(img, interpolation="nearest")
+    #filename = os.path.join(
+        #os.path.dirname(os.path.realpath(rqalpha.__file__)),
+        #"resource", 'ricequant-logo.png')
+    #img = mpimg.imread(filename)
+    #ax.imshow(img, interpolation="nearest")
     ax.autoscale_view()
 
     # draw risk and portfolio
