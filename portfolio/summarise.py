@@ -5,7 +5,7 @@ Created on Sun Aug 11 22:23:38 2019
 @author: Administrator
 """
 import datetime
-from result_analyer import Cal
+from .result_analyer import Cal
 def int_to_datetime(data):
     year = int(data / 10000)
     day = data % 100
