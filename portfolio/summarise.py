@@ -20,7 +20,7 @@ def summarise(res,config):
     benchmark_annualized_returns = calculator._annualized_returns(market_series)
     benchmark_total_returns = calculator._total_returns(market_series)
     max_drawdown = calculator._downside_risk(portfolio_series)
-    beta = calculator._downside_risk(portfolio_series,market_series)
+    beta = calculator._beta(portfolio_series,market_series)
     sharpe = calculator._sharpe(portfolio_series)
     total_returns = calculator._total_returns(portfolio_series)
     volatility = calculator._var(portfolio_series)
