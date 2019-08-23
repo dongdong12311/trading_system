@@ -40,11 +40,11 @@ def summarise(res,config):
                'cash':config['initial_capital'],
                'downside_risk':0.0,
                'end_date':end_datetime,
-               'information_ratio':0,
+               'information_ratio':0.0,
                'max_drawdown':max_drawdown,
                'run_type':'0',
                'sharpe':sharpe,
-               'sortino':0,
+               'sortino':0.0,
                 'start_date':start_datetime,
                 'strategy_file':'name',
                 'strategy_name':'name',
@@ -52,7 +52,7 @@ def summarise(res,config):
                 'total_value':total_returns,
                 'tracking_error':'0',
                 'unit_net_value':1.0,
-                'units':1,
+                'units':1.0,
                 'volatility':volatility
             }
     res['sys_analyser']['summary'] = summary       
