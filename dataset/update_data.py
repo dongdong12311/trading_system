@@ -69,15 +69,14 @@ def update_stock_index(file_path):
     }
     for key in index_dic.keys():
         "this should be removed "
-        if key == 'SSE':
+        #if key == 'SSE':
             #pro = ts.pro_api()
-            df = pro.index_basic(market= key )
-            for code in df['ts_code']:
-                "this should be removed "
-                if code == '000001.SH' or code == '000300.SH':
-                    data = pro.index_daily(ts_code=code)
-                    data = data.sort_values(by = 'trade_date')
-                    data = data.drop(['ts_code'],axis=1)
-                    data.to_csv(os.path.join(file_path,code),index = False)
-                
+        df = pro.index_basic(market= key )
+        for code in df['ts_code']:
+            "this should be removed "
+            #if code == '000001.SH' or code == '000300.SH':
+            data = pro.index_daily(ts_code=code)
+            data = data.sort_values(by = 'trade_date')
+            data = data.drop(['ts_code'],axis=1)
+            data.to_csv(os.path.join(file_path,code),index = False)
         

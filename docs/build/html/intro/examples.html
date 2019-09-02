@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>策略示例 &mdash; CNICPortofolio 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="基础 API" href="../api/base_api.html" />
+    <link rel="prev" title="教程：均值方差模型" href="tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CNICPortofolio
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">基础</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">教程：均值方差模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">策略示例</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#intro-examples-buy-and-hold">第一个策略-买入&amp;持有</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#markowitz">Markowitz均值方差模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cvar">条件在险价值（CVAR）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hpr">等级风险平价（HPR）模型</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/base_api.html">基础 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/extend_api.html">扩展 API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">进阶</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="run_algorithm.html">多种方式运行策略</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizing_parameters.html">参数调优</a></li>
+</ul>
+<p class="caption"><span class="caption-text">开发</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/make_contribute.html">如何贡献代码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/basic_concept.html">基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/event_source.html">扩展事件源</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/data_source.html">扩展数据源</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/collecting_logs.html">收集策略日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">CHANGELOG</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CNICPortofolio</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>策略示例</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intro/examples.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="intro-examples">
+<span id="id1"></span><h1>策略示例<a class="headerlink" href="#intro-examples" title="Permalink to this headline">¶</a></h1>
+<p>在下面我们列举一些常用的投资组合策略，您可以通过我们的平台运行</p>
+<div class="section" id="intro-examples-buy-and-hold">
+<span id="id2"></span><h2>第一个策略-买入&amp;持有<a class="headerlink" href="#intro-examples-buy-and-hold" title="Permalink to this headline">¶</a></h2>
+<p>这是一个最简单的策略：在某一段时间每次增加10%的仓位一直到期末</p>
+<div class="highlight-python3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># 在这个方法中编写任何的初始化逻辑。context对象将会在你的算法策略的任何方法之间做传递。</span>
+<span class="n">stocks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;000001.SZ&quot;</span><span class="p">,</span> <span class="s2">&quot;000002.SZ&quot;</span><span class="p">]</span>
+
+<span class="c1"># 在这个方法中编写任何的初始化逻辑。context对象将会在你的算法策略的任何方法之间做传递。</span>
+<span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">stocks</span> <span class="o">=</span> <span class="n">stocks</span>
+
+<span class="k">def</span> <span class="nf">handle_bar</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">api</span><span class="p">):</span>
+    <span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># buy 10% everyday</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+        <span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">latest_price</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span><span class="s2">&quot;1d&quot;</span><span class="p">))</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">order_target_percent</span><span class="p">(</span><span class="n">stocks</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">prices</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="markowitz">
+<h2>Markowitz均值方差模型<a class="headerlink" href="#markowitz" title="Permalink to this headline">¶</a></h2>
+<p>以下是一个我们引入pyfolio编写的Markowitz均值方差模型：</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">trading_system.api.api</span> <span class="k">import</span> <span class="n">get_calendar</span>
+<span class="n">cal</span> <span class="o">=</span> <span class="n">get_calendar</span><span class="p">()</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">20150101</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">20151212</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="n">sessions_in_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">balance_dates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">balance_dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+
+<span class="n">STOCKS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;000001.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000002.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000004.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000005.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000006.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000007.SZ&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;000008.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000009.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000010.SZ&#39;</span><span class="p">]</span>
+<span class="n">expected_return_days</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#利用多久的数据估算</span>
+<span class="n">cov_method</span> <span class="o">=</span> <span class="s1">&#39;sample&#39;</span> <span class="c1">#如何估算协方差矩阵</span>
+<span class="n">optimization_criterion</span> <span class="o">=</span> <span class="s1">&#39;max_sharpe&#39;</span> <span class="c1">#优化方法</span>
+<span class="n">cleaned_weights</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">balance_dates</span> <span class="o">=</span> <span class="n">balance_dates</span>
+
+<span class="n">target_return</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">target_risk</span>   <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">risk_free_rate</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="kn">from</span> <span class="nn">pypfopt.efficient_frontier</span> <span class="k">import</span> <span class="n">EfficientFrontier</span>
+<span class="kn">from</span> <span class="nn">pypfopt</span> <span class="k">import</span> <span class="n">risk_models</span>
+<span class="kn">from</span> <span class="nn">pypfopt</span> <span class="k">import</span> <span class="n">expected_returns</span>
+
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">stocks</span> <span class="o">=</span> <span class="n">STOCKS</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">expected_return_days</span> <span class="o">=</span> <span class="n">expected_return_days</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">opt_criterion</span> <span class="o">=</span> <span class="n">optimization_criterion</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">tick</span>  <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">balance_dates</span> <span class="o">=</span> <span class="n">balance_dates</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">cleaned_weights</span> <span class="o">=</span> <span class="n">cleaned_weights</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">cov_method</span> <span class="o">=</span> <span class="n">cov_method</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">target_return</span> <span class="o">=</span> <span class="n">target_return</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">targe_risk</span> <span class="o">=</span> <span class="n">target_risk</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">risk_free_rate</span> <span class="o">=</span> <span class="n">risk_free_rate</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initialized!&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">balance_dates</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+            <span class="n">history_price</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">history_bars</span><span class="p">(</span><span class="n">code</span><span class="p">,</span>
+                                              <span class="n">context</span><span class="o">.</span><span class="n">expected_return_days</span><span class="p">,</span>
+                                              <span class="s1">&#39;1d&#39;</span><span class="p">,</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">history_price</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">code</span><span class="p">:</span><span class="n">history_price</span><span class="p">})</span>
+        <span class="n">history_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">expected_returns</span><span class="o">.</span><span class="n">mean_historical_return</span><span class="p">(</span><span class="n">history_prices</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">cov_method</span> <span class="o">==</span> <span class="s1">&#39;sample&#39;</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">risk_models</span><span class="o">.</span><span class="n">sample_cov</span><span class="p">(</span><span class="n">history_prices</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">context</span><span class="o">.</span><span class="n">cov_method</span> <span class="o">==</span> <span class="s1">&#39;semi&#39;</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">risk_models</span><span class="o">.</span><span class="n">semicovariance</span><span class="p">(</span><span class="n">history_prices</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">context</span><span class="o">.</span><span class="n">cov_method</span> <span class="o">==</span> <span class="s1">&#39;exp_cov&#39;</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">risk_models</span><span class="o">.</span><span class="n">exp_cov</span><span class="p">(</span><span class="n">history_prices</span><span class="p">)</span>
+
+        <span class="n">ef</span> <span class="o">=</span> <span class="n">EfficientFrontier</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">opt_criterion</span> <span class="o">==</span> <span class="s1">&#39;max_sharpe&#39;</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">max_sharpe</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">context</span><span class="o">.</span><span class="n">opt_criterion</span> <span class="o">==</span> <span class="s1">&#39;efficient_return&#39;</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">efficient_return</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">target_return</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">context</span><span class="o">.</span><span class="n">opt_criterion</span> <span class="o">==</span> <span class="s1">&#39;efficient_risk&#39;</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">efficient_risk</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">targe_risk</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">risk_free_rate</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">context</span><span class="o">.</span><span class="n">opt_criterion</span> <span class="o">==</span> <span class="s1">&#39;min_volatility&#39;</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">min_volatility</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">cleaned_weights</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">clean_weights</span><span class="p">()</span>
+
+        <span class="n">weight</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+            <span class="n">weight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">code</span><span class="p">])</span>
+            <span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">latest_price</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="s2">&quot;1d&quot;</span><span class="p">))</span>
+
+        <span class="n">data</span><span class="o">.</span><span class="n">order_target_percent</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span><span class="n">prices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cvar">
+<h2>条件在险价值（CVAR）模型<a class="headerlink" href="#cvar" title="Permalink to this headline">¶</a></h2>
+<p>以下是一个我们引入pyfolio编写的CVAR均值方差模型：</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypfopt</span> <span class="k">import</span> <span class="n">value_at_risk</span><span class="p">,</span><span class="n">hierarchical_risk_parity</span>
+<span class="kn">from</span> <span class="nn">trading_system.dataset.base_data_source</span> <span class="k">import</span> <span class="n">BaseDataSource</span>
+<span class="kn">from</span> <span class="nn">trading_system.dataset.const</span>  <span class="k">import</span> <span class="n">base_path</span><span class="p">,</span><span class="n">bcolz_data_path</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">trading_system.api.api</span> <span class="k">import</span> <span class="n">get_calendar</span>
+<span class="n">cal</span> <span class="o">=</span> <span class="n">get_calendar</span><span class="p">()</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">20150101</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">20151212</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="n">sessions_in_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">balance_dates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">balance_dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+
+<span class="n">STOCKS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;000001.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000002.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000004.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000005.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000006.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000007.SZ&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;000008.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000009.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000010.SZ&#39;</span><span class="p">]</span>
+
+<span class="n">risk_free_rate</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">cleaned_weights</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">expected_return_days</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#利用多久的数据估算</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">stocks</span> <span class="o">=</span> <span class="n">STOCKS</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">expected_return_days</span> <span class="o">=</span> <span class="n">expected_return_days</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">tick</span>  <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">balance_dates</span> <span class="o">=</span> <span class="n">balance_dates</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">cleaned_weights</span> <span class="o">=</span> <span class="n">cleaned_weights</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">risk_free_rate</span> <span class="o">=</span> <span class="n">risk_free_rate</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initialized!&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">balance_dates</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+            <span class="n">history_price</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">history_bars</span><span class="p">(</span><span class="n">code</span><span class="p">,</span>
+                                              <span class="n">context</span><span class="o">.</span><span class="n">expected_return_days</span><span class="p">,</span>
+                                              <span class="s1">&#39;1d&#39;</span><span class="p">,</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">history_price</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">code</span><span class="p">:</span><span class="n">history_price</span><span class="p">})</span>
+        <span class="n">history_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">value_at_risk</span><span class="o">.</span><span class="n">CVAROpt</span><span class="p">(</span><span class="n">history_prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">min_cvar</span><span class="p">()</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+            <span class="n">weight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">code</span><span class="p">])</span>
+            <span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">latest_price</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="s2">&quot;1d&quot;</span><span class="p">))</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">order_target_percent</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span><span class="n">prices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hpr">
+<h2>等级风险平价（HPR）模型<a class="headerlink" href="#hpr" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypfopt</span> <span class="k">import</span> <span class="n">value_at_risk</span><span class="p">,</span><span class="n">hierarchical_risk_parity</span>
+<span class="kn">from</span> <span class="nn">trading_system.dataset.base_data_source</span> <span class="k">import</span> <span class="n">BaseDataSource</span>
+<span class="kn">from</span> <span class="nn">trading_system.dataset.const</span>  <span class="k">import</span> <span class="n">base_path</span><span class="p">,</span><span class="n">bcolz_data_path</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">trading_system.api.api</span> <span class="k">import</span> <span class="n">get_calendar</span>
+<span class="n">cal</span> <span class="o">=</span> <span class="n">get_calendar</span><span class="p">()</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">20150101</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">20151212</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">cal</span><span class="o">.</span><span class="n">sessions_in_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">balance_dates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">20</span><span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">balance_dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+
+<span class="n">STOCKS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;000001.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000002.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000004.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000005.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000006.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000007.SZ&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;000008.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000009.SZ&#39;</span><span class="p">,</span><span class="s1">&#39;000010.SZ&#39;</span><span class="p">]</span>
+
+<span class="n">risk_free_rate</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">cleaned_weights</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">expected_return_days</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#利用多久的数据估算</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">stocks</span> <span class="o">=</span> <span class="n">STOCKS</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">expected_return_days</span> <span class="o">=</span> <span class="n">expected_return_days</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">tick</span>  <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">balance_dates</span> <span class="o">=</span> <span class="n">balance_dates</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">cleaned_weights</span> <span class="o">=</span> <span class="n">cleaned_weights</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">risk_free_rate</span> <span class="o">=</span> <span class="n">risk_free_rate</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initialized!&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">balance_dates</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+            <span class="n">history_price</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">history_bars</span><span class="p">(</span><span class="n">code</span><span class="p">,</span>
+                                              <span class="n">context</span><span class="o">.</span><span class="n">expected_return_days</span><span class="p">,</span>
+                                              <span class="s1">&#39;1d&#39;</span><span class="p">,</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">history_price</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">code</span><span class="p">:</span><span class="n">history_price</span><span class="p">})</span>
+        <span class="n">history_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">hierarchical_risk_parity</span><span class="o">.</span><span class="n">HRPOpt</span><span class="p">(</span><span class="n">history_prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">hrp_portfolio</span><span class="p">()</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">:</span>
+            <span class="n">weight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">code</span><span class="p">])</span>
+            <span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">latest_price</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="s2">&quot;1d&quot;</span><span class="p">))</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">order_target_percent</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">stocks</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span><span class="n">prices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api/base_api.html" class="btn btn-neutral float-right" title="基础 API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="教程：均值方差模型" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+      <span class="lastupdated">
+        Last updated on Aug 30, 2019.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ 
+<script type="text/javascript">
+    console.log("RQAlpha Powered By RiceQuant.");
+</script>
+
+
+</body>
+</html>

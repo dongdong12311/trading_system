@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>基础 API &mdash; CNICPortofolio 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="扩展 API" href="extend_api.html" />
+    <link rel="prev" title="策略示例" href="../intro/examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CNICPortofolio
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">基础</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/tutorial.html">教程：均值方差模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/examples.html">策略示例</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">基础 API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">基本方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#init">init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handle-bar">handle_bar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.api">交易相关函数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submit-order">submit_order - 自由参数下单「通用」</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extend_api.html">扩展 API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">进阶</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/run_algorithm.html">多种方式运行策略</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/optimizing_parameters.html">参数调优</a></li>
+</ul>
+<p class="caption"><span class="caption-text">开发</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/make_contribute.html">如何贡献代码</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/basic_concept.html">基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/event_source.html">扩展事件源</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/data_source.html">扩展数据源</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/collecting_logs.html">收集策略日志</a></li>
+</ul>
+<p class="caption"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">CHANGELOG</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CNICPortofolio</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>基础 API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/base_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="api">
+<span id="api-base-api"></span><h1>基础 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>基本方法<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="init">
+<h3>init<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt>
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">context</em><span class="sig-paren">)</span></dt>
+<dd><p>【必须实现】</p>
+<p>初始化方法 - 在回测和实时模拟交易只会在启动的时候触发一次。你的算法会使用这个方法来设置你需要的各种初始化配置。 context 对象将会在你的算法的所有其他的方法之间进行传递以方便你可以拿取到。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">StrategyContext</span></code> object) – 策略上下文</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="c1"># cash_limit的属性是根据用户需求自己定义的，你可以定义无限多种自己随后需要的属性，ricequant的系统默认只是会占用context.portfolio的关键字来调用策略的投资组合信息</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">cash_limit</span> <span class="o">=</span> <span class="mi">5000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="handle-bar">
+<h3>handle_bar<a class="headerlink" href="#handle-bar" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="handle_bar">
+<code class="sig-name descname">handle_bar</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">bar_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#handle_bar" title="Permalink to this definition">¶</a></dt>
+<dd><p>【必须实现】</p>
+<p>bar数据的更新会自动触发该方法的调用。策略具体逻辑可在该方法内实现，包括交易信号的产生、订单的创建等。在实时模拟交易中，该函数在交易时间内会每分钟被触发一次。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">StrategyContext</span></code> object) – 策略上下文</p></li>
+<li><p><strong>bar_dict</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BarDict</span></code> object) – key为order_book_id，value为bar数据。当前合约池内所有合约的bar数据信息都会更新在bar_dict里面</p></li>
+</ul>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">api</span><span class="p">):</span>
+    <span class="c1"># put all your algorithm main logic here.</span>
+    <span class="c1"># ...</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">order_target_percent</span><span class="p">(</span><span class="n">stocks</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span><span class="n">prices</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-api.api">
+<span id="id2"></span><h2>交易相关函数<a class="headerlink" href="#module-api.api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="submit-order">
+<h3>submit_order - 自由参数下单「通用」<a class="headerlink" href="#submit-order" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="extend_api.html" class="btn btn-neutral float-right" title="扩展 API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../intro/examples.html" class="btn btn-neutral float-left" title="策略示例" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+      <span class="lastupdated">
+        Last updated on Aug 31, 2019.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ 
+<script type="text/javascript">
+    console.log("RQAlpha Powered By RiceQuant.");
+</script>
+
+
+</body>
+</html>
