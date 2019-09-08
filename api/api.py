@@ -442,3 +442,17 @@ def draw_efficient_frontier(effcient_frontier_output):
     ax.set_ylabel('Expected Return', fontsize=12)
     ax.tick_params(labelsize=12)
     plt.show()
+
+def create_equal_difference_balanced_dates(start,end,dt):
+    cal = get_calendar()
+    dates = cal.sessions_in_range(start, end)
+    balance_dates = []
+    for i in range(len(dates)):
+        if i % dt== 0:
+            balance_dates.append(dates[i].date())
+    return balance_dates
+def create_balanced_dates(start,end,instruments,method):
+    if method == 'equal_difference':
+        return create_equal_difference_balanced_dates(start,end,instruments['dt'])
+    
+    

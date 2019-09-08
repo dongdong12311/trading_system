@@ -13,8 +13,8 @@ from .dataset.dataptr import CreateDataPtr
 from .dataset.dataset import CreateHistoryDataSet
 from .portfolio.portfolio import CreateSimulatePortfolio
 class Context:
-    def __init__(self):
-        pass
+    def __init__(self,config):
+        self.config = config
 
 
 class Handler():
@@ -59,7 +59,7 @@ class Engine:
                                    self.config['initial_capital'])          
             
     def Run(self,init,handle_bar,api,excutor,dataptr,portfolio = None):  
-        context = Context()
+        context = Context(self.config)
         init(context)
         
         events = CreateEventQueue()
@@ -89,11 +89,9 @@ from trading_system.dataset.base_data_source import BaseDataSource
 from trading_system.analyser.analyser import Analyser
 def Run_func(init,handle_bar,config):                    
     start = config['start']
-    end = config['end']            
-    print('init data')     
+    end = config['end']               
     dataset = BaseDataSource(config['data_path'])
     ptrl_list = dataset.get_trading_calendar(start,end)
-    print("done")
     analyser = Analyser()
     # _______________dataset_______________   
     dataptr = CreateDataPtr(dataset,ptrl_list)

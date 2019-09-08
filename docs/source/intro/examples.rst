@@ -13,8 +13,16 @@
 第一个策略-买入&持有
 ------------------------------------------------------
 
-这是一个最简单的策略：在某一段时间每次增加10%的仓位一直到期末
+在某一段时间每次增加一定比例的仓位一直到期末
 
+输入参数：
+
+1.调仓日期，可选的有：每日调仓、每周调仓、每月调仓、季度调仓、定时调仓。如果选择“定时调仓”需要选择调仓周期，例如：20  
+
+2.投资组合标的，例如：["000001.SZ", "000002.SZ"]
+
+3.调仓权重，例如：[0.1,0.1]
+          
 ..  code-block:: python3
     :linenos:
 
@@ -41,34 +49,35 @@
 Markowitz均值方差模型
 ------------------------------------------------------
 
-以下是一个我们引入pyfolio编写的Markowitz均值方差模型：
+输入参数：
+
+1.调仓日期，可选的有：每日调仓、每周调仓、每月调仓、季度调仓、定时调仓。如果选择“定时调仓”需要选择调仓周期，例如：20
+
+2.投资组合标的，例如：["000001.SZ", "000002.SZ"]
+
+3.数据周期，例如：20
+
+4.如何估计协方差矩阵，可选：sample,semi,exp_cov
+
+5.优化方法，可选：max_sharpe，efficient_return，efficient_risk，min_volatility
 
 ..  code-block:: python3
 
-    import datetime
-    from trading_system.api.api import get_calendar
-    cal = get_calendar()
-    start = 20150101
-    end = 20151212
-    dates = cal.sessions_in_range(start, end)
+    from trading_system.api.api import create_balanced_dates
     
-    balance_dates = []
-    for i in range(len(dates)):
-        if i%20== 0:
-            balance_dates.append(dates[i].date())
             
     STOCKS = ['000001.SZ','000002.SZ','000004.SZ','000005.SZ','000006.SZ','000007.SZ',
               '000008.SZ','000009.SZ','000010.SZ']
+              
     expected_return_days = 100 #利用多久的数据估算
     cov_method = 'sample' #如何估算协方差矩阵
     optimization_criterion = 'max_sharpe' #优化方法
     cleaned_weights = True
-    
-    balance_dates = balance_dates
-    
     target_return = 0.2
     target_risk   = 0.1
     risk_free_rate = 0.02    
+    
+    
     
     from pypfopt.efficient_frontier import EfficientFrontier
     from pypfopt import risk_models
@@ -80,7 +89,11 @@ Markowitz均值方差模型
         context.expected_return_days = expected_return_days
         context.opt_criterion = optimization_criterion
         context.tick  = 0
-        context.balance_dates = balance_dates
+        context.balance_dates = create_balanced_dates(
+                context.config['start'],
+                context.config['end'],
+                {"dt":20},
+                method ='equal_difference')
         context.cleaned_weights = cleaned_weights
         context.cov_method = cov_method
         context.target_return = target_return    
@@ -129,51 +142,55 @@ Markowitz均值方差模型
                 weight.append(weights[code])
                 prices.append(data.latest_price(code,"1d"))
             
-            data.order_target_percent(context.stocks, weight,prices)    
+            data.order_target_percent(context.stocks, weight,prices)     
     
 
 条件在险价值（CVAR）模型
 ------------------------------------------------------
 
-以下是一个我们引入pyfolio编写的CVAR均值方差模型：
+输入参数：
+
+1.调仓日期，可选的有：每日调仓、每周调仓、每月调仓、季度调仓、定时调仓。如果选择“定时调仓”需要选择调仓周期，例如：20  
+
+2.投资组合标的，例如：["000001.SZ", "000002.SZ"]
+
+3.数据周期，例如：100
+
+4.置信度beta，例如：0.8（0到1之间的数）
+
 
 ..  code-block:: python3
 
-    from pypfopt import value_at_risk,hierarchical_risk_parity
-    from trading_system.dataset.base_data_source import BaseDataSource
-    from trading_system.dataset.const  import base_path,bcolz_data_path
-    import os
+    from pypfopt import value_at_risk
+    from trading_system.api.api import create_balanced_dates
     import pandas as pd
-    import datetime
-    from trading_system.api.api import get_calendar
-    cal = get_calendar()
-    start = 20150101
-    end = 20151212
-    dates = cal.sessions_in_range(start, end)
     
-    balance_dates = []
-    for i in range(len(dates)):
-        if i%20== 0:
-            balance_dates.append(dates[i].date())
+    
             
     STOCKS = ['000001.SZ','000002.SZ','000004.SZ','000005.SZ','000006.SZ','000007.SZ',
               '000008.SZ','000009.SZ','000010.SZ']
     
-    risk_free_rate = 0.02   
-    cleaned_weights = True
+    
     expected_return_days = 100 #利用多久的数据估算
+    beta = 0.8
+    balance_period = 20
+    balance_method = 'equal_difference'
+    
     def initialize(context):
         context.stocks = STOCKS
     
         context.expected_return_days = expected_return_days
-    
+        context.beta = beta
         context.tick  = 0
-        context.balance_dates = balance_dates
-        context.cleaned_weights = cleaned_weights
-        context.risk_free_rate = risk_free_rate
+        context.balance_dates = create_balanced_dates(
+                context.config['start'],
+                context.config['end'],
+                {"dt":balance_period},
+                method =balance_method)
+        context.cleaned_weights = True
     
         print('initialized!')
-    import pandas as pd
+        
     def handle_data(context, data):
         date = data.today()
         if date in context.balance_dates:
@@ -186,54 +203,62 @@ Markowitz均值方差模型
                     temp.update({code:history_price})
             history_prices = pd.DataFrame(temp)
             model = value_at_risk.CVAROpt(history_prices.pct_change().dropna())
-            weights = model.min_cvar()
+            try:           
+                weights = model.min_cvar(beta = context.beta)
+            except:
+                return 
             weight = []
             prices = []
             for code in context.stocks:
                 weight.append(weights[code])
                 prices.append(data.latest_price(code,"1d"))
-            data.order_target_percent(context.stocks, weight,prices)    
+            data.order_target_percent(context.stocks, weight,prices)      
+   
+      
 
 等级风险平价（HPR）模型
 ------------------------------------------------------
 
+
+输入参数：
+
+1.调仓日期，可选的有：每日调仓、每周调仓、每月调仓、季度调仓、定时调仓。如果选择“定时调仓”需要选择调仓周期，例如：20  
+
+2.投资组合标的，例如：["000001.SZ", "000002.SZ"]
+
+3.数据周期，例如：100
+
+
 ..  code-block:: python3   
     
-    from pypfopt import value_at_risk,hierarchical_risk_parity
-    from trading_system.dataset.base_data_source import BaseDataSource
-    from trading_system.dataset.const  import base_path,bcolz_data_path
-    import os
+    from pypfopt import hierarchical_risk_parity
     import pandas as pd
-    import datetime
-    from trading_system.api.api import get_calendar
-    cal = get_calendar()
-    start = 20150101
-    end = 20151212
-    dates = cal.sessions_in_range(start, end)
-    
-    balance_dates = []
-    for i in range(len(dates)):
-        if i%20== 0:
-            balance_dates.append(dates[i].date())
-            
+    from trading_system.api.api import create_balanced_dates
+        
     STOCKS = ['000001.SZ','000002.SZ','000004.SZ','000005.SZ','000006.SZ','000007.SZ',
               '000008.SZ','000009.SZ','000010.SZ']
     
-    risk_free_rate = 0.02   
+    balance_period = 20
+    
+    balance_method = 'equal_difference'
+     
     cleaned_weights = True
+    
     expected_return_days = 100 #利用多久的数据估算
+    
     def initialize(context):
         context.stocks = STOCKS
-    
         context.expected_return_days = expected_return_days
-    
         context.tick  = 0
-        context.balance_dates = balance_dates
+        context.balance_dates = create_balanced_dates(
+                context.config['start'],
+                context.config['end'],
+                {"dt":balance_period},
+                method =balance_method)
         context.cleaned_weights = cleaned_weights
-        context.risk_free_rate = risk_free_rate
     
         print('initialized!')
-    import pandas as pd
+    
     def handle_data(context, data):
         date = data.today()
         if date in context.balance_dates:
@@ -253,6 +278,7 @@ Markowitz均值方差模型
                 weight.append(weights[code])
                 prices.append(data.latest_price(code,"1d"))
             data.order_target_percent(context.stocks, weight,prices)    
+  
 
 
 

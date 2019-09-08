@@ -1,234 +1,61 @@
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>扩展数据源 &mdash; CNICPortofolio 0.0 documentation</title>
-  
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>扩展数据源 &#8212; CNICPortofolio 0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="收集策略日志" href="collecting_logs.html" />
     <link rel="prev" title="扩展事件源" href="event_source.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="collecting_logs.html" title="收集策略日志"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="event_source.html" title="扩展事件源"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CNICPortofolio 0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> CNICPortofolio
-          
-
-          
-          </a>
-
-          
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
-            
-              <div class="version">
-                0.0
-              </div>
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">基础</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/tutorial.html">教程：均值方差模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/examples.html">策略示例</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/base_api.html">基础 API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/extend_api.html">扩展 API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">进阶</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../intro/run_algorithm.html">多种方式运行策略</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/optimizing_parameters.html">参数调优</a></li>
-</ul>
-<p class="caption"><span class="caption-text">开发</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="make_contribute.html">如何贡献代码</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic_concept.html">基本概念</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mod.html">Mod</a></li>
-<li class="toctree-l1"><a class="reference internal" href="event_source.html">扩展事件源</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">扩展数据源</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">增加自有数据源</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">策略中直接读取自有数据</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#import">在策略中 import 自定义模块</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api">扩展 API 实现自有数据的读取</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">替换已有数据源</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">基础数据</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tushare">行情数据 - 五十行代码接入 tushare 行情数据</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="collecting_logs.html">收集策略日志</a></li>
-</ul>
-<p class="caption"><span class="caption-text">其他</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../history.html">CHANGELOG</a></li>
-</ul>
-
-            
-          
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">CNICPortofolio</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-      <li>扩展数据源</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../_sources/development/data_source.rst.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="development-data-source">
+  <div class="section" id="development-data-source">
 <span id="id1"></span><h1>扩展数据源<a class="headerlink" href="#development-data-source" title="Permalink to this headline">¶</a></h1>
 <p>在程序化交易的过程中，数据的获取是非常重要的一个环节，而数据又包含很多种不同类型的数据，有行情数据、财务数据、指标因子数据以及自定义类型数据。</p>
 <p>在实际交易过程中，对接数据源主要分为两种：</p>
 <ul class="simple">
-<li><p>增加自有数据源</p>
-<ul>
-<li><p>策略中直接读取自有数据</p></li>
-<li><p>在策略中 <cite>import</cite> 自定义模块</p></li>
-<li><p>扩展 API 实现自有数据的读取</p></li>
+<li>增加自有数据源<ul>
+<li>策略中直接读取自有数据</li>
+<li>在策略中 <cite>import</cite> 自定义模块</li>
+<li>扩展 API 实现自有数据的读取</li>
 </ul>
 </li>
-<li><p>替换已有数据源</p>
-<ul>
-<li><p>基础数据</p></li>
-<li><p>行情数据</p></li>
+<li>替换已有数据源<ul>
+<li>基础数据</li>
+<li>行情数据</li>
 </ul>
 </li>
 </ul>
@@ -238,8 +65,8 @@
 <h3>策略中直接读取自有数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>RQAlpha 不限制本地运行的策略调使用哪些库，因此您可以直接在策略中读取文件、访问数据库等，但需要关注如下两个注意事项:</p>
 <ul class="simple">
-<li><p>请在 <code class="code docutils literal notranslate"><span class="pre">init</span></code>, <code class="code docutils literal notranslate"><span class="pre">before_trading</span></code>, <code class="code docutils literal notranslate"><span class="pre">handle_bar</span></code>, <code class="code docutils literal notranslate"><span class="pre">handle_tick</span></code>, <code class="code docutils literal notranslate"><span class="pre">after_trading</span></code> 等函数中读取自有数据，而不要在函数外执行数据获取的代码，否则可能会产生异常。</p></li>
-<li><p>RQAlpha 是读取策略代码并执行的，因此实际当前路径是运行 <cite>rqalpha</cite> 命令的路径，策略使用相对路径容易产生异常。如果您需要根据策略路径来定位相对路径可以通过 <code class="code docutils literal notranslate"><span class="pre">context.config.base.strategy_file</span></code> 来获取策略路径，从而获取相对策略文件的其他路径，具体使用方式请看下面的示例代码。</p></li>
+<li>请在 <code class="code docutils literal notranslate"><span class="pre">init</span></code>, <code class="code docutils literal notranslate"><span class="pre">before_trading</span></code>, <code class="code docutils literal notranslate"><span class="pre">handle_bar</span></code>, <code class="code docutils literal notranslate"><span class="pre">handle_tick</span></code>, <code class="code docutils literal notranslate"><span class="pre">after_trading</span></code> 等函数中读取自有数据，而不要在函数外执行数据获取的代码，否则可能会产生异常。</li>
+<li>RQAlpha 是读取策略代码并执行的，因此实际当前路径是运行 <cite>rqalpha</cite> 命令的路径，策略使用相对路径容易产生异常。如果您需要根据策略路径来定位相对路径可以通过 <code class="code docutils literal notranslate"><span class="pre">context.config.base.strategy_file</span></code> 来获取策略路径，从而获取相对策略文件的其他路径，具体使用方式请看下面的示例代码。</li>
 </ul>
 <p><a class="reference external" href="https://github.com/ricequant/rqalpha/blob/develop/rqalpha/examples/data_source/read_csv_as_df.py">read_csv_as_df</a></p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rqalpha.api</span> <span class="k">import</span> <span class="o">*</span>
@@ -295,9 +122,9 @@
 <h3>在策略中 import 自定义模块<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h3>
 <p>如果您定义了自定义模块，希望在策略中引用，只需要在初始化的时候将模块对应的路径添加到 <code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> 即可，但需要关注如下两个注意事项:</p>
 <ul class="simple">
-<li><p>如果没有特殊原因，请在 <code class="code docutils literal notranslate"><span class="pre">init</span></code> 阶段添加 <code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> 路径。</p></li>
-<li><p>如果您的自定义模块是基于策略策略的相对路径，则需要在 <code class="code docutils literal notranslate"><span class="pre">init</span></code> 函数中通过 <code class="code docutils literal notranslate"><span class="pre">context.config.base.strategy_file</span></code> 获取到策略路径，然后再添加到 <code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> 中。</p></li>
-<li><p>RQAlpha 是读取策略代码并执行的，因此实际当前路径是执行 <cite>rqalpha</cite> 命令的路径，避免使用相对路径。</p></li>
+<li>如果没有特殊原因，请在 <code class="code docutils literal notranslate"><span class="pre">init</span></code> 阶段添加 <code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> 路径。</li>
+<li>如果您的自定义模块是基于策略策略的相对路径，则需要在 <code class="code docutils literal notranslate"><span class="pre">init</span></code> 函数中通过 <code class="code docutils literal notranslate"><span class="pre">context.config.base.strategy_file</span></code> 获取到策略路径，然后再添加到 <code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> 中。</li>
+<li>RQAlpha 是读取策略代码并执行的，因此实际当前路径是执行 <cite>rqalpha</cite> 命令的路径，避免使用相对路径。</li>
 </ul>
 <p><a class="reference external" href="https://github.com/ricequant/rqalpha/blob/develop/rqalpha/examples/data_source/get_csv_module.py">get_csv_module</a></p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -441,9 +268,9 @@
 </div>
 <p>如上述代码，首先配置信息中添加 <cite>extend_api_demo</cite> 对应的配置</p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">enabled</span></code>: True 表示开启该 Mod</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">lib</span></code>: 指定该 Mod 对应的加载位置(rqlalpha 会自动去寻找 <cite>rqalpha_mod_xxx</cite> 对应的库，如果该库已经通过 <cite>pip install</cite> 安装，则无需显式指定 lib)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">csv_path</span></code>： 指定 csv 所在位置</p></li>
+<li><code class="code docutils literal notranslate"><span class="pre">enabled</span></code>: True 表示开启该 Mod</li>
+<li><code class="code docutils literal notranslate"><span class="pre">lib</span></code>: 指定该 Mod 对应的加载位置(rqlalpha 会自动去寻找 <cite>rqalpha_mod_xxx</cite> 对应的库，如果该库已经通过 <cite>pip install</cite> 安装，则无需显式指定 lib)</li>
+<li><code class="code docutils literal notranslate"><span class="pre">csv_path</span></code>： 指定 csv 所在位置</li>
 </ul>
 <p>至此，我们就可以直接在策略中使用 <cite>get_csv_as_df</cite> 函数了。</p>
 </div>
@@ -471,8 +298,8 @@
 <p>目前基础数据，比如 <cite>Instruments</cite>, <cite>st_stocks</cite>, <cite>suspended_days</cite>, <cite>trading_dates</cite> 都是全量数据，并且可以通过 <cite>$ rqalpha update-bundle</cite> 每天更新，因此没有相应的显式接口可以对其进行替换。</p>
 <p>您如果想要替换，可以使用如下两种方式:</p>
 <ul class="simple">
-<li><p>写脚本将自有数据源按照相同的格式生成对应的文件，并进行文件替换。</p></li>
-<li><p>实现 <a class="reference external" href="http://rqalpha.io/zh_CN/latest/development/basic_concept.html#datasource">AbstractDataSource</a> 对应的接口，您可以继承 <a class="reference external" href="https://github.com/ricequant/rqalpha/blob/develop/rqalpha/data/base_data_source.py">BaseDataSource</a> 并 override 对应的接口即可完成替换。</p></li>
+<li>写脚本将自有数据源按照相同的格式生成对应的文件，并进行文件替换。</li>
+<li>实现 <a class="reference external" href="http://rqalpha.io/zh_CN/latest/development/basic_concept.html#datasource">AbstractDataSource</a> 对应的接口，您可以继承 <a class="reference external" href="https://github.com/ricequant/rqalpha/blob/develop/rqalpha/data/base_data_source.py">BaseDataSource</a> 并 override 对应的接口即可完成替换。</li>
 </ul>
 </div>
 <div class="section" id="tushare">
@@ -489,10 +316,10 @@
 <p>这样做的好处在于我们不必重写 DataSource 需要实现的所有函数，而可以只实现与我们想替换的数据源相关的函数，其他数据的获取直接甩锅给父类 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDataSource</span></code> 。</p>
 <p>与行情数据密切相关的主要有以下三个函数：</p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">current_snapshot(instrument,</span> <span class="pre">frequency,</span> <span class="pre">dt)</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">get_bar(instrument,</span> <span class="pre">dt,</span> <span class="pre">frequency)</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">history_bars(instrument,</span> <span class="pre">bar_count,</span> <span class="pre">frequency,</span> <span class="pre">fields,</span> <span class="pre">dt,</span> <span class="pre">skip_suspended=True)</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">available_data_range(frequency)</span></code></p></li>
+<li><code class="code docutils literal notranslate"><span class="pre">current_snapshot(instrument,</span> <span class="pre">frequency,</span> <span class="pre">dt)</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">get_bar(instrument,</span> <span class="pre">dt,</span> <span class="pre">frequency)</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">history_bars(instrument,</span> <span class="pre">bar_count,</span> <span class="pre">frequency,</span> <span class="pre">fields,</span> <span class="pre">dt,</span> <span class="pre">skip_suspended=True)</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">available_data_range(frequency)</span></code></li>
 </ul>
 <p>经过查看 <code class="xref py py-class docutils literal notranslate"><span class="pre">DataProxy</span></code> 类的源代码，可以发现，提供日级别数据的 DataSource 类不需要实现 <code class="code docutils literal notranslate"><span class="pre">current_snapshot</span></code> 函数，所以我们只关注后三个函数的实现。</p>
 <p><code class="code docutils literal notranslate"><span class="pre">get_bar</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">history_bars</span></code> 函数实现的主要功能都是传入 instrument 对象，从 tushare 获取指定时间或时间段的 bar 数据。我们把这一过程抽象为一个函数:</p>
@@ -673,59 +500,84 @@
 </div>
 
 
-           </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="collecting_logs.html" class="btn btn-neutral float-right" title="收集策略日志" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="event_source.html" class="btn btn-neutral float-left" title="扩展事件源" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 
-      <span class="lastupdated">
-        Last updated on Aug 30, 2019.
-      </span>
-
-    </p>
-  </div> 
-
-</footer>
-
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">扩展数据源</a><ul>
+<li><a class="reference internal" href="#id2">增加自有数据源</a><ul>
+<li><a class="reference internal" href="#id3">策略中直接读取自有数据</a></li>
+<li><a class="reference internal" href="#import">在策略中 import 自定义模块</a></li>
+<li><a class="reference internal" href="#api">扩展 API 实现自有数据的读取</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">替换已有数据源</a><ul>
+<li><a class="reference internal" href="#id5">基础数据</a></li>
+<li><a class="reference internal" href="#tushare">行情数据 - 五十行代码接入 tushare 行情数据</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-    </section>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="event_source.html"
+                        title="previous chapter">扩展事件源</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="collecting_logs.html"
+                        title="next chapter">收集策略日志</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/data_source.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="collecting_logs.html" title="收集策略日志"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="event_source.html" title="扩展事件源"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CNICPortofolio 0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
 
-  </div>
-  
-
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-  
- 
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Last updated on Sep 06, 2019.
+    </div>
 <script type="text/javascript">
     console.log("RQAlpha Powered By RiceQuant.");
 </script>
 
-
-</body>
+  </body>
 </html>

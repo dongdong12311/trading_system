@@ -1,322 +1,143 @@
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>多种方式运行策略 &mdash; CNICPortofolio 0.0 documentation</title>
-  
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>多种方式运行策略 &#8212; CNICPortofolio 0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="参数调优" href="optimizing_parameters.html" />
     <link rel="prev" title="扩展 API" href="../api/extend_api.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="optimizing_parameters.html" title="参数调优"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../api/extend_api.html" title="扩展 API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CNICPortofolio 0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> CNICPortofolio
-          
-
-          
-          </a>
-
-          
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
-            
-              <div class="version">
-                0.0
-              </div>
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">基础</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">教程：均值方差模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">策略示例</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/base_api.html">基础 API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/extend_api.html">扩展 API</a></li>
-</ul>
-<p class="caption"><span class="caption-text">进阶</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">多种方式运行策略</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">命令行运行</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">命令行参数</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mod">传递 Mod 参数</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mod-option">系统内置 Mod Option扩展</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">通过 Mod 自定义扩展命令行参数</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">使用配置文件运行策略</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#config-yml">创建 <cite>config.yml</cite> 配置文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">创建默认配置文件模板</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">策略内配置参数信息</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rqalpha">通过引用 RQAlpha 库在代码中运行策略</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#run-file">使用 <code class="code docutils literal notranslate"><span class="pre">run_file</span></code> 函数来运行策略</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-code">使用 <code class="code docutils literal notranslate"><span class="pre">run_code</span></code> 函数来运行策略</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-func">使用 <code class="code docutils literal notranslate"><span class="pre">run_func</span></code> 函数来运行策略</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="optimizing_parameters.html">参数调优</a></li>
-</ul>
-<p class="caption"><span class="caption-text">开发</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../development/make_contribute.html">如何贡献代码</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/basic_concept.html">基本概念</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/mod.html">Mod</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/event_source.html">扩展事件源</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/data_source.html">扩展数据源</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/collecting_logs.html">收集策略日志</a></li>
-</ul>
-<p class="caption"><span class="caption-text">其他</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../history.html">CHANGELOG</a></li>
-</ul>
-
-            
-          
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">CNICPortofolio</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-      <li>多种方式运行策略</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../_sources/intro/run_algorithm.rst.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="intro-run-alogirhtm">
+  <div class="section" id="intro-run-alogirhtm">
 <span id="id1"></span><h1>多种方式运行策略<a class="headerlink" href="#intro-run-alogirhtm" title="Permalink to this headline">¶</a></h1>
 <p>在策略开发过程中，每个人都会有不同的需求，比如</p>
 <ul class="simple">
-<li><p>不同的时间周期进行回测，</p></li>
-<li><p>想直接基于回测数据进行编程分析，或直接看一下收益结果。</p></li>
-<li><p>想将回测好的策略直接用于实盘交易</p></li>
-<li><p>不同的品种设置不同的风控标准</p></li>
+<li>不同的时间周期进行回测，</li>
+<li>想直接基于回测数据进行编程分析，或直接看一下收益结果。</li>
+<li>想将回测好的策略直接用于实盘交易</li>
+<li>不同的品种设置不同的风控标准</li>
 </ul>
 <p>在设计 RQAlpha API 的时候，考虑到以上随时变化的需求，将这部分需要以参数方式的配置严格从代码层面剥离。同一份策略代码，通过启动策略时传入不同的参数来实现完全不同的策略开发、风控、运行和调优等的功能。</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="first admonition-title">Warning</p>
 <p>我们提供了多种方式来配置策略参数，请务必理解参数配置的优先级顺序，以避免在设置参数的时候因为优先级搞错而导致设置无效的问题！</p>
-<p>参数配置优先级：策略代码中配置 &gt; 命令行传参 = <code class="code docutils literal notranslate"><span class="pre">run_file</span> <span class="pre">|</span> <span class="pre">run_code</span> <span class="pre">|</span> <span class="pre">run_func</span></code> 函数传参 &gt; 用户配置文件 &gt; 系统默认配置文件</p>
+<p class="last">参数配置优先级：策略代码中配置 &gt; 命令行传参 = <code class="code docutils literal notranslate"><span class="pre">run_file</span> <span class="pre">|</span> <span class="pre">run_code</span> <span class="pre">|</span> <span class="pre">run_func</span></code> 函数传参 &gt; 用户配置文件 &gt; 系统默认配置文件</p>
 </div>
 <div class="section" id="id2">
 <h2>命令行运行<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>在命令行模式中，我们预先定义了常用的参数作为命令行的 option，您可以直接在控制台输入参数来配置 RQAlpha，但并不是所有的参数都可以通过命令行来配置，如果有一些特殊的参数需要配置，请结合其他方式来配置您的策略。当然您也可以扩展命令行，来实现您指定的命令行 option 选项。</p>
 <div class="section" id="id3">
 <h3>命令行参数<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 5%" />
-<col style="width: 12%" />
-<col style="width: 83%" />
+<col width="5%" />
+<col width="12%" />
+<col width="83%" />
 </colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>参数名缩写</p></th>
-<th class="head"><p>参数名全称</p></th>
-<th class="head"><p>说明</p></th>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">参数名缩写</th>
+<th class="head">参数名全称</th>
+<th class="head">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr class="row-even"><td><p>-d</p></td>
-<td><p><cite>- -</cite> data-bundle-path</p></td>
-<td><p>数据源所存储的文件路径</p></td>
+<tbody valign="top">
+<tr class="row-even"><td>-d</td>
+<td><cite>- -</cite> data-bundle-path</td>
+<td>数据源所存储的文件路径</td>
 </tr>
-<tr class="row-odd"><td><p>-f</p></td>
-<td><p><cite>- -</cite> strategy-file</p></td>
-<td><p>启动的策略文件路径</p></td>
+<tr class="row-odd"><td>-f</td>
+<td><cite>- -</cite> strategy-file</td>
+<td>启动的策略文件路径</td>
 </tr>
-<tr class="row-even"><td><p>-s</p></td>
-<td><p><cite>- -</cite> start-date</p></td>
-<td><p>回测起始日期</p></td>
+<tr class="row-even"><td>-s</td>
+<td><cite>- -</cite> start-date</td>
+<td>回测起始日期</td>
 </tr>
-<tr class="row-odd"><td><p>-e</p></td>
-<td><p><cite>- -</cite> end-date</p></td>
-<td><p>回测结束日期(如果是实盘，则忽略该配置)</p></td>
+<tr class="row-odd"><td>-e</td>
+<td><cite>- -</cite> end-date</td>
+<td>回测结束日期(如果是实盘，则忽略该配置)</td>
 </tr>
-<tr class="row-even"><td><p>-bm</p></td>
-<td><p><cite>- -</cite> benchmark</p></td>
-<td><p>Benchmark，如果不设置，默认没有基准参照</p></td>
+<tr class="row-even"><td>-bm</td>
+<td><cite>- -</cite> benchmark</td>
+<td>Benchmark，如果不设置，默认没有基准参照</td>
 </tr>
-<tr class="row-odd"><td><p>-mm</p></td>
-<td><p><cite>- -</cite> margin-multiplier</p></td>
-<td><p>设置保证金乘数，默认为1</p></td>
+<tr class="row-odd"><td>-mm</td>
+<td><cite>- -</cite> margin-multiplier</td>
+<td>设置保证金乘数，默认为1</td>
 </tr>
-<tr class="row-even"><td><p>-a</p></td>
-<td><p><cite>- -</cite> account</p></td>
-<td><p>设置账户类型及起始资金，比如股票期货混合策略，起始资金分别为10000, 20000 <code class="code docutils literal notranslate"><span class="pre">--account</span> <span class="pre">stock</span> <span class="pre">10000</span> <span class="pre">--account</span> <span class="pre">future</span> <span class="pre">20000</span></code></p></td>
+<tr class="row-even"><td>-a</td>
+<td><cite>- -</cite> account</td>
+<td>设置账户类型及起始资金，比如股票期货混合策略，起始资金分别为10000, 20000 <code class="code docutils literal notranslate"><span class="pre">--account</span> <span class="pre">stock</span> <span class="pre">10000</span> <span class="pre">--account</span> <span class="pre">future</span> <span class="pre">20000</span></code></td>
 </tr>
-<tr class="row-odd"><td><p>-fq</p></td>
-<td><p><cite>- -</cite> frequency</p></td>
-<td><p>目前支持 <code class="code docutils literal notranslate"><span class="pre">1d</span></code> (日线回测) 和 <code class="code docutils literal notranslate"><span class="pre">1m</span></code> (分钟线回测)，如果要进行分钟线，请注意是否拥有对应的数据源，目前开源版本是不提供对应的数据源的</p></td>
+<tr class="row-odd"><td>-fq</td>
+<td><cite>- -</cite> frequency</td>
+<td>目前支持 <code class="code docutils literal notranslate"><span class="pre">1d</span></code> (日线回测) 和 <code class="code docutils literal notranslate"><span class="pre">1m</span></code> (分钟线回测)，如果要进行分钟线，请注意是否拥有对应的数据源，目前开源版本是不提供对应的数据源的</td>
 </tr>
-<tr class="row-even"><td><p>-rt</p></td>
-<td><p><cite>- -</cite> run-type</p></td>
-<td><p>运行类型，<code class="code docutils literal notranslate"><span class="pre">b</span></code> 为回测，<code class="code docutils literal notranslate"><span class="pre">p</span></code> 为模拟交易, <code class="code docutils literal notranslate"><span class="pre">r</span></code> 为实盘交易</p></td>
+<tr class="row-even"><td>-rt</td>
+<td><cite>- -</cite> run-type</td>
+<td>运行类型，<code class="code docutils literal notranslate"><span class="pre">b</span></code> 为回测，<code class="code docutils literal notranslate"><span class="pre">p</span></code> 为模拟交易, <code class="code docutils literal notranslate"><span class="pre">r</span></code> 为实盘交易</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> resume</p></td>
-<td><p>在模拟交易和实盘交易中，RQAlpha支持策略的pause &amp;&amp; resume，该选项表示开启 resume 功能</p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> resume</td>
+<td>在模拟交易和实盘交易中，RQAlpha支持策略的pause &amp;&amp; resume，该选项表示开启 resume 功能</td>
 </tr>
-<tr class="row-even"><td><p>-l</p></td>
-<td><p><cite>- -</cite> log-level</p></td>
-<td><p>选择日志的输出等级，有 <code class="code docutils literal notranslate"><span class="pre">verbose</span></code> | code:<cite>info</cite> | <code class="code docutils literal notranslate"><span class="pre">warning</span></code> | <code class="code docutils literal notranslate"><span class="pre">error</span></code> 等选项，您可以通过设置 <code class="code docutils literal notranslate"><span class="pre">verbose</span></code> 来查看最详细的日志，或者设置 <code class="code docutils literal notranslate"><span class="pre">error</span></code> 只查看错误级别的日志输出</p></td>
+<tr class="row-even"><td>-l</td>
+<td><cite>- -</cite> log-level</td>
+<td>选择日志的输出等级，有 <code class="code docutils literal notranslate"><span class="pre">verbose</span></code> | code:<cite>info</cite> | <code class="code docutils literal notranslate"><span class="pre">warning</span></code> | <code class="code docutils literal notranslate"><span class="pre">error</span></code> 等选项，您可以通过设置 <code class="code docutils literal notranslate"><span class="pre">verbose</span></code> 来查看最详细的日志，或者设置 <code class="code docutils literal notranslate"><span class="pre">error</span></code> 只查看错误级别的日志输出</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> locale</p></td>
-<td><p>选择语言， 支持 <code class="code docutils literal notranslate"><span class="pre">en</span></code> | <code class="code docutils literal notranslate"><span class="pre">cn</span></code></p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> locale</td>
+<td>选择语言， 支持 <code class="code docutils literal notranslate"><span class="pre">en</span></code> | <code class="code docutils literal notranslate"><span class="pre">cn</span></code></td>
 </tr>
-<tr class="row-even"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> disable-user-system-log</p></td>
-<td><p>关闭用户策略产生的系统日志(比如订单未成交等提示)</p></td>
+<tr class="row-even"><td>N/A</td>
+<td><cite>- -</cite> disable-user-system-log</td>
+<td>关闭用户策略产生的系统日志(比如订单未成交等提示)</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> enable-profiler</p></td>
-<td><p>启动策略逐行性能分析，启动后，在回测结束，会打印策略的运行性能分析报告，可以看到每一行消耗的时间</p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> enable-profiler</td>
+<td>启动策略逐行性能分析，启动后，在回测结束，会打印策略的运行性能分析报告，可以看到每一行消耗的时间</td>
 </tr>
-<tr class="row-even"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> config</p></td>
-<td><p>设置配置文件路径</p></td>
+<tr class="row-even"><td>N/A</td>
+<td><cite>- -</cite> config</td>
+<td>设置配置文件路径</td>
 </tr>
-<tr class="row-odd"><td><p>-mc</p></td>
-<td><p><cite>- -</cite> mod-config</p></td>
-<td><p>配置 mod ，支持多个。<code class="code docutils literal notranslate"><span class="pre">-mc</span> <span class="pre">funcat_api.enabled</span> <span class="pre">True</span></code> 就可以启动一个 mod</p></td>
+<tr class="row-odd"><td>-mc</td>
+<td><cite>- -</cite> mod-config</td>
+<td>配置 mod ，支持多个。<code class="code docutils literal notranslate"><span class="pre">-mc</span> <span class="pre">funcat_api.enabled</span> <span class="pre">True</span></code> 就可以启动一个 mod</td>
 </tr>
 </tbody>
 </table>
@@ -325,8 +146,8 @@
 <h3>传递 Mod 参数<a class="headerlink" href="#mod" title="Permalink to this headline">¶</a></h3>
 <p>对于 mod 的参数传递，可以使用 <code class="code docutils literal notranslate"><span class="pre">-mc</span></code> 传递 mod 设置。</p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">-mc</span> <span class="pre">sys_stock_realtime.enabled</span> <span class="pre">True</span></code> 启动 sys_stock_realtime 这个 mod。</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">-mc</span> <span class="pre">sys_stock_realtime.fps</span> <span class="pre">60</span></code> 设置 sys_stock_realtime 的 fps 参数为 60。</p></li>
+<li><code class="code docutils literal notranslate"><span class="pre">-mc</span> <span class="pre">sys_stock_realtime.enabled</span> <span class="pre">True</span></code> 启动 sys_stock_realtime 这个 mod。</li>
+<li><code class="code docutils literal notranslate"><span class="pre">-mc</span> <span class="pre">sys_stock_realtime.fps</span> <span class="pre">60</span></code> 设置 sys_stock_realtime 的 fps 参数为 60。</li>
 </ul>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">rqalpha</span> <span class="n">run</span> <span class="o">-</span><span class="n">rt</span> <span class="n">p</span> <span class="o">-</span><span class="n">fq</span> <span class="mi">1</span><span class="n">m</span> <span class="o">-</span><span class="n">f</span> <span class="n">strategy</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">account</span> <span class="n">stock</span> <span class="mi">100000</span> <span class="o">-</span><span class="n">mc</span> <span class="n">sys_stock_realtime</span><span class="o">.</span><span class="n">enabled</span> <span class="kc">True</span> <span class="o">-</span><span class="n">mc</span> <span class="n">sys_stock_realtime</span><span class="o">.</span><span class="n">fps</span> <span class="mi">60</span>
 </pre></div>
@@ -335,74 +156,74 @@
 <div class="section" id="mod-option">
 <h3>系统内置 Mod Option扩展<a class="headerlink" href="#mod-option" title="Permalink to this headline">¶</a></h3>
 <p>系统内置 Mod 也提供了启动参数的扩展，当您开启了对应的 Mod 时，即可使用:</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 7%" />
-<col style="width: 18%" />
-<col style="width: 75%" />
+<col width="7%" />
+<col width="18%" />
+<col width="75%" />
 </colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>参数名缩写</p></th>
-<th class="head"><p>参数名全称</p></th>
-<th class="head"><p>说明</p></th>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">参数名缩写</th>
+<th class="head">参数名全称</th>
+<th class="head">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr class="row-even"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> report</p></td>
-<td><p>[sys_analyser]保存交易详情</p></td>
+<tbody valign="top">
+<tr class="row-even"><td>N/A</td>
+<td><cite>- -</cite> report</td>
+<td>[sys_analyser]保存交易详情</td>
 </tr>
-<tr class="row-odd"><td><p>-o</p></td>
-<td><p><cite>- -</cite> output-file</p></td>
-<td><p>[sys_analyser]指定回测结束时将回测数据输出到指定文件中</p></td>
+<tr class="row-odd"><td>-o</td>
+<td><cite>- -</cite> output-file</td>
+<td>[sys_analyser]指定回测结束时将回测数据输出到指定文件中</td>
 </tr>
-<tr class="row-even"><td><p>-p</p></td>
-<td><p><cite>- -</cite> plot</p></td>
-<td><p>[sys_analyser]在回测结束后，查看图形化的收益曲线</p></td>
+<tr class="row-even"><td>-p</td>
+<td><cite>- -</cite> plot</td>
+<td>[sys_analyser]在回测结束后，查看图形化的收益曲线</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> no-plot</p></td>
-<td><p>[sys_analyser]在回测结束后，不查看图形化的收益曲线</p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> no-plot</td>
+<td>[sys_analyser]在回测结束后，不查看图形化的收益曲线</td>
 </tr>
-<tr class="row-even"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> plot-save</p></td>
-<td><p>[sys_analyser]将plot的收益图以指定文件路径保存</p></td>
+<tr class="row-even"><td>N/A</td>
+<td><cite>- -</cite> plot-save</td>
+<td>[sys_analyser]将plot的收益图以指定文件路径保存</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> progress</p></td>
-<td><p>[sys_progress]开启命令行显示回测进度条</p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> progress</td>
+<td>[sys_progress]开启命令行显示回测进度条</td>
 </tr>
-<tr class="row-even"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> no-progress</p></td>
-<td><p>[sys_progress]关闭命令行查看回测进度</p></td>
+<tr class="row-even"><td>N/A</td>
+<td><cite>- -</cite> no-progress</td>
+<td>[sys_progress]关闭命令行查看回测进度</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> short-stock</p></td>
-<td><p>[sys_risk]允许股票卖空</p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> short-stock</td>
+<td>[sys_risk]允许股票卖空</td>
 </tr>
-<tr class="row-even"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> no-short-stock</p></td>
-<td><p>[sys_risk]不允许股票卖空</p></td>
+<tr class="row-even"><td>N/A</td>
+<td><cite>- -</cite> no-short-stock</td>
+<td>[sys_risk]不允许股票卖空</td>
 </tr>
-<tr class="row-odd"><td><p>N/A</p></td>
-<td><p><cite>- -</cite> signal</p></td>
-<td><p>[sys_simulation]开启信号模式，不进行撮合，直接成交</p></td>
+<tr class="row-odd"><td>N/A</td>
+<td><cite>- -</cite> signal</td>
+<td>[sys_simulation]开启信号模式，不进行撮合，直接成交</td>
 </tr>
-<tr class="row-even"><td><p>-sp</p></td>
-<td><p><cite>- -</cite> slippage</p></td>
-<td><p>[sys_simulation]设置滑点</p></td>
+<tr class="row-even"><td>-sp</td>
+<td><cite>- -</cite> slippage</td>
+<td>[sys_simulation]设置滑点</td>
 </tr>
-<tr class="row-odd"><td><p>-cm</p></td>
-<td><p><cite>- -</cite> commission-multiplier</p></td>
-<td><p>[sys_simulation]设置手续费乘数，默认为1</p></td>
+<tr class="row-odd"><td>-cm</td>
+<td><cite>- -</cite> commission-multiplier</td>
+<td>[sys_simulation]设置手续费乘数，默认为1</td>
 </tr>
-<tr class="row-even"><td><p>-me</p></td>
-<td><p><cite>- -</cite> match-engine</p></td>
-<td><p>[sys_simulation]启用的回测引擎，目前支持 <code class="code docutils literal notranslate"><span class="pre">current_bar</span></code> (当前Bar收盘价撮合) 和 <code class="code docutils literal notranslate"><span class="pre">next_bar</span></code> (下一个Bar开盘价撮合)</p></td>
+<tr class="row-even"><td>-me</td>
+<td><cite>- -</cite> match-engine</td>
+<td>[sys_simulation]启用的回测引擎，目前支持 <code class="code docutils literal notranslate"><span class="pre">current_bar</span></code> (当前Bar收盘价撮合) 和 <code class="code docutils literal notranslate"><span class="pre">next_bar</span></code> (下一个Bar开盘价撮合)</td>
 </tr>
-<tr class="row-odd"><td><p>-r</p></td>
-<td><p><cite>- -</cite> rid</p></td>
-<td><p>[sys_simulation]可以指定回测的唯一ID，用户区分多次回测的结果</p></td>
+<tr class="row-odd"><td>-r</td>
+<td><cite>- -</cite> rid</td>
+<td>[sys_simulation]可以指定回测的唯一ID，用户区分多次回测的结果</td>
 </tr>
 </tbody>
 </table>
@@ -411,8 +232,8 @@
 <h3>通过 Mod 自定义扩展命令行参数<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>RQAlpha 非常灵活，您可以在您的 Mod 中扩展命令行，我们以 <a class="reference external" href="https://github.com/ricequant/rqalpha/tree/master/rqalpha/mod/rqalpha_mod_sys_analyser">sys_analyser Mod</a> 添加自定义option <code class="code docutils literal notranslate"><span class="pre">--plot</span></code> 来实现展示收益图为例，来介绍以下如何扩展您自己的命令行参数。</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>rqalpha_mod_sys_analyser 对应源码请访问 <a class="reference external" href="https://github.com/ricequant/rqalpha/blob/master/rqalpha/mod/rqalpha_mod_sys_analyser/__init__.py">这里</a> 进行查看。</p>
+<p class="first admonition-title">Note</p>
+<p class="last">rqalpha_mod_sys_analyser 对应源码请访问 <a class="reference external" href="https://github.com/ricequant/rqalpha/blob/master/rqalpha/mod/rqalpha_mod_sys_analyser/__init__.py">这里</a> 进行查看。</p>
 </div>
 <p>RQAlpha 使用 <a class="reference external" href="http://click.pocoo.org/5/">click</a> 来实现命令行参数配置，您需要通过 click 来构建 option。
 通过 <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">rqalpha</span> <span class="pre">import</span> <span class="pre">cli</span></code> 来获取命令行对象。</p>
@@ -455,8 +276,8 @@
 <div class="section" id="config-yml">
 <h3>创建 <cite>config.yml</cite> 配置文件<a class="headerlink" href="#config-yml" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>我们假设在当前目录下存在 <cite>buy_and_hold.py</cite> 策略文件</p>
+<p class="first admonition-title">Note</p>
+<p class="last">我们假设在当前目录下存在 <cite>buy_and_hold.py</cite> 策略文件</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yml</span>
 <span class="n">base</span><span class="p">:</span>
@@ -547,8 +368,8 @@
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>生成的默认配置模板中不包含 Mod 相关的配置信息，每个 Mod 的配置信息请参考 Mod 对应的文档。</p>
+<p class="first admonition-title">Warning</p>
+<p class="last">生成的默认配置模板中不包含 Mod 相关的配置信息，每个 Mod 的配置信息请参考 Mod 对应的文档。</p>
 </div>
 </div>
 </div>
@@ -591,16 +412,16 @@
 </div>
 <p>RQAlpha 会自动识别策略中的 <code class="code docutils literal notranslate"><span class="pre">__config__</span></code> 变量。</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>虽然 RQAlpha 提供了此种方式来配置策略，但主要用于自动化测试中对每个策略进行参数配置，不建议在策略开发和运行中使用此方式运行策略。</p>
+<p class="first admonition-title">Warning</p>
+<p class="last">虽然 RQAlpha 提供了此种方式来配置策略，但主要用于自动化测试中对每个策略进行参数配置，不建议在策略开发和运行中使用此方式运行策略。</p>
 </div>
 </div>
 <div class="section" id="rqalpha">
 <h2>通过引用 RQAlpha 库在代码中运行策略<a class="headerlink" href="#rqalpha" title="Permalink to this headline">¶</a></h2>
 <p>并不是所有业务场景下都需要使用 <code class="code docutils literal notranslate"><span class="pre">rqalpha</span> <span class="pre">run</span></code> 命令行的方式来运行策略，您也可以在您的脚本/程序中直接运行 RQAlpha。</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>即使通过代码方式启动策略，RQAlpha 也会寻找代码执行目录是否存在 <cite>config.yml</cite> / <cite>config.json</cite> 文件，作为用户配置文件来加载配置。但代码中传入的 <cite>config</cite> 优先级更高。</p>
+<p class="first admonition-title">Note</p>
+<p class="last">即使通过代码方式启动策略，RQAlpha 也会寻找代码执行目录是否存在 <cite>config.yml</cite> / <cite>config.json</cite> 文件，作为用户配置文件来加载配置。但代码中传入的 <cite>config</cite> 优先级更高。</p>
 </div>
 <div class="section" id="run-file">
 <h3>使用 <code class="code docutils literal notranslate"><span class="pre">run_file</span></code> 函数来运行策略<a class="headerlink" href="#run-file" title="Permalink to this headline">¶</a></h3>
@@ -744,59 +565,92 @@
 </div>
 
 
-           </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="optimizing_parameters.html" class="btn btn-neutral float-right" title="参数调优" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../api/extend_api.html" class="btn btn-neutral float-left" title="扩展 API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 
-      <span class="lastupdated">
-        Last updated on Aug 30, 2019.
-      </span>
-
-    </p>
-  </div> 
-
-</footer>
-
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">多种方式运行策略</a><ul>
+<li><a class="reference internal" href="#id2">命令行运行</a><ul>
+<li><a class="reference internal" href="#id3">命令行参数</a></li>
+<li><a class="reference internal" href="#mod">传递 Mod 参数</a></li>
+<li><a class="reference internal" href="#mod-option">系统内置 Mod Option扩展</a></li>
+<li><a class="reference internal" href="#id4">通过 Mod 自定义扩展命令行参数</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">使用配置文件运行策略</a><ul>
+<li><a class="reference internal" href="#config-yml">创建 <cite>config.yml</cite> 配置文件</a></li>
+<li><a class="reference internal" href="#id7">创建默认配置文件模板</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">策略内配置参数信息</a></li>
+<li><a class="reference internal" href="#rqalpha">通过引用 RQAlpha 库在代码中运行策略</a><ul>
+<li><a class="reference internal" href="#run-file">使用 <code class="code docutils literal notranslate"><span class="pre">run_file</span></code> 函数来运行策略</a></li>
+<li><a class="reference internal" href="#run-code">使用 <code class="code docutils literal notranslate"><span class="pre">run_code</span></code> 函数来运行策略</a></li>
+<li><a class="reference internal" href="#run-func">使用 <code class="code docutils literal notranslate"><span class="pre">run_func</span></code> 函数来运行策略</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-    </section>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../api/extend_api.html"
+                        title="previous chapter">扩展 API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optimizing_parameters.html"
+                        title="next chapter">参数调优</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/intro/run_algorithm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="optimizing_parameters.html" title="参数调优"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../api/extend_api.html" title="扩展 API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CNICPortofolio 0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
 
-  </div>
-  
-
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-  
- 
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Last updated on Sep 06, 2019.
+    </div>
 <script type="text/javascript">
     console.log("RQAlpha Powered By RiceQuant.");
 </script>
 
-
-</body>
+  </body>
 </html>
