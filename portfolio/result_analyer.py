@@ -56,7 +56,9 @@ class Cal:
     @staticmethod
     def _sharpe(series):
         series_new = Cal._ratio(series)
-        return ((series_new.mean() - 0.00011) / series_new.std()) * math.sqrt(252)
+        if series_new.std():            
+            return ((series_new.mean() - 0.00011) / series_new.std()) * math.sqrt(252)
+        return None
 
     # 总收益率
     #最后一天资产净值 - 1

@@ -281,6 +281,85 @@ Markowitz均值方差模型
   
 
 
+Black-Litterman 模型
+------------------------------------------------------
 
 
+输入参数：
+
+1.调仓日期，可选的有：每日调仓、每周调仓、每月调仓、季度调仓、定时调仓。如果选择“定时调仓”需要选择调仓周期，例如：20  
+
+2.投资组合标的，例如：["000001.SZ", "000002.SZ"]
+
+3.数据周期，例如：100
+
+4.观点矩阵P Q
+
+
+..  code-block:: python3 
+ 
+    import numpy as np
+    'this example is given to realize the cvar model '
+    from trading_system.api.api import describe,draw_efficient_frontier,get_BL_efficient_frontier,get_BL_minimum_variance_portfolio,get_BL_maximum_utility_portfolio,get_maximum_sharpe_portfolio
+    from trading_system.api.api import create_balanced_dates
+    import pandas as pd
+    
+    balance_period = 20
+    balance_method = 'equal_difference' 
+    STOCKS = ['000001.SZ','000002.SZ','000004.SZ','000005.SZ','000006.SZ','000007.SZ']
+    cleaned_weights = True
+    expected_return_days = 100 #利用多久的数据估算
+    
+    
+    def initialize(context):
+        context.stocks = STOCKS
+        context.expected_return_days = expected_return_days
+        context.tick  = 0
+        context.balance_dates = create_balanced_dates(
+                context.config['start'],
+                context.config['end'],
+                {"dt":balance_period},
+                method =balance_method)
+        context.cleaned_weights = cleaned_weights
+    
+        
+        
+    def handle_data(context, data):
+        date = data.today()
+        if date in context.balance_dates:
+            temp = {}
+            for code in context.stocks:
+                history_price = data.history_bars(code,
+                                                  context.expected_return_days,
+                                                  '1d','close')
+                if history_price is not None:     
+                    temp.update({code:history_price})
+            df = pd.DataFrame(temp)
+            #计算收益率数据
+            for index in context.stocks:
+                df[index] = df[index] / df[index].shift() - 1.
+            return_table = df.dropna()
+            output=describe(return_table, is_print=True) 
+            covariance_matrix = output['covariance_matrix']
+            tau = 0.05
+            # - 生成观点矩阵P、Q、Omega，根据我们对股市资产配置的未来走势的判断，给出下面3个观点：
+            # - 观点1： 000004.SZ的收益低于000005.SZ收益2%
+            ## - 观点2： '000006.SZ'收益上调到10%，
+            ## - 观点3：'000007.SZ'收益5% 
+    
+            P = np.array([[0,0,1,-1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]])
+            Q = np.array([0.02,0.1,0.05])
+            
+            Omega = tau*(P.dot(covariance_matrix).dot(P.transpose()))
+            
+            Omega = np.diag(np.diag(Omega,k=0))
+            
+            weights=get_BL_minimum_variance_portfolio(return_table,tau=0.05,P=P,Q=Q,Omega=Omega, allow_short=False, show_details=True)
+            
+            weight = []
+            prices = []
+            for code in context.stocks:
+                weight.append(weights[code])
+                prices.append(data.latest_price(code,"1d"))
+            data.order_target_percent(context.stocks, weight,prices)  
  

@@ -74,3 +74,6 @@ class DayBarStore(object):
     def get_date_range(self, order_book_id):
         s, e = self._index[order_book_id]
         return self._table.cols['date'][s], self._table.cols['date'][e - 1]
+    
+    def get_index(self):
+        return self._index

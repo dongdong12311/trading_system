@@ -46,7 +46,8 @@ class BaseDataSource():
     def is_st_stock(self, order_book_id, dates):
         return self._st_stock_days.contains(order_book_id, dates)
 
-        
+    def get_day_bars(self):
+        return self._day_bars
     @lru_cache(None)
     def _all_day_bars_of(self,code,i,trade_date = 'date'):
         #i = self._index_of(instrument)

@@ -5,7 +5,7 @@ Created on Sun Aug 11 21:47:27 2019
 @author: Administrator
 """
 
-from .api.api import CreateExcutionAPI,CreateMarketDataAPI,CreateOrderInfoAPI,CreatePositionInfoAPI,User_API
+from .api.api import CreateExcutionAPI,CreateMarketDataAPI,CreateOrderInfoAPI,CreatePositionInfoAPI,User_API,create_balanced_dates
 from .event.event import CreateEventQueue
 from .strategy.strategy import CreateStragety
 from .excutor.excutor import CreateExcutor
@@ -14,8 +14,14 @@ from .dataset.dataset import CreateHistoryDataSet
 from .portfolio.portfolio import CreateSimulatePortfolio
 class Context:
     def __init__(self,config):
-        self.config = config
-
+        names = self.__dict__
+        for key in config.keys():
+            names[key] = config[key]
+        names['balance_dates'] = create_balanced_dates(
+        config['start'],
+        config['end'],
+        {"dt":config['balanced_dates']['param']},
+        method =config['balanced_dates']['method'])
 
 class Handler():
     def __init__(self,events):
@@ -87,10 +93,14 @@ class Engine:
                     raise TypeError    
 from trading_system.dataset.base_data_source import BaseDataSource
 from trading_system.analyser.analyser import Analyser
+import os
+from .dataset.const import base_path,bcolz_data_path
+
 def Run_func(init,handle_bar,config):                    
     start = config['start']
-    end = config['end']               
-    dataset = BaseDataSource(config['data_path'])
+    end = config['end']      
+    datapath = os.path.join(base_path,bcolz_data_path)         
+    dataset = BaseDataSource(datapath)
     ptrl_list = dataset.get_trading_calendar(start,end)
     analyser = Analyser()
     # _______________dataset_______________   
