@@ -48,9 +48,10 @@ def generate(datas):
 def generate_all_param(config): 
     all_param = []
     if len(config['opt_param']):
+        params = list(config['opt_param'].keys())
         temp = []
-        for param in config['opt_param']:
-            temp.append(config[param]['dt'])
+        for param in params:
+            temp.append(config['opt_param'][param]['dt'])
     
         head = generate(temp)
         res = [] 
@@ -61,6 +62,6 @@ def generate_all_param(config):
         for d in res:
             p = []
             for i in range(len(d)):            
-                p.append(config[config['opt_param'][i]]['start'] + config[config['opt_param'][i]]['step'] * d[i])
+                p.append(config['opt_param'][params[i]]['start'] + config['opt_param'][params[i]]['step'] * d[i])
             all_param.append(p)
-    return all_param
+    return params,all_param
